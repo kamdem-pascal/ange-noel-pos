@@ -1,7 +1,11 @@
-﻿Antigravity IDE.exe
+Antigravity IDE.exe
+*.exe
 backups/
 *.zip
 deploy/
 __pycache__/
 _check.js
 temp_check.js
+update_index.js
+node_modules/
+package-lock.json

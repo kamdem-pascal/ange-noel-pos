@@ -1,0 +1,13 @@
+{
+  "name": "ange-noel-pos",
+  "version": "4.0.0",
+  "description": "Les Gourmandises de Ange Noël — Business Manager & POS PWA avec Firebase",
+  "type": "module",
+  "scripts": {
+    "start": "python serveur.py",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "firebase": "^10.12.2"
+  }
+}

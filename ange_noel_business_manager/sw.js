@@ -1,11 +1,22 @@
-const CACHE = 'ange-noel-v3.0';
+const CACHE = 'ange-noel-v4.0';
 const ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icon.svg',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './css/style.css',
+  './css/base.css',
+  './css/pos.css',
+  './css/mobile.css',
+  './js/app.js',
+  './js/config/firebase.js',
+  './js/data/initial-data.js',
+  './js/services/auth-service.js',
+  './js/services/db-service.js',
+  './js/modules/ui.js',
+  './js/modules/users.js'
 ];
 
 self.addEventListener('install', (e) => {
@@ -25,8 +36,9 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
-  // Do not intercept non-http/https
+  // Do not intercept non-http/https or firebase cdn
   if (!url.protocol.startsWith('http')) return;
+  if (url.origin.includes('firestore.googleapis.com') || url.origin.includes('identitytoolkit.googleapis.com')) return;
 
   e.respondWith(
     caches.match(e.request).then((cached) => {
