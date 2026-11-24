@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="theme-color" content="#5b141a">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#4c1015">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Les Gourmandises de Ange Noël — Business Manager</title>
@@ -1212,67 +1212,417 @@
       }
     }
 
-    /* Responsive */
-    @media (max-width: 992px) {
+    /* =========================================================================
+       RESPONSIVE MOBILE-FIRST ARCHITECTURE
+       ========================================================================= */
+
+    /* Drawer Backdrop */
+    .drawer-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 1050;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .drawer-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+
+    .drawer-close-btn {
+      display: none;
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .drawer-close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Mobile Top Header (hidden on desktop) */
+    .mobile-top-header {
+      display: none;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: #4c1015;
+      color: white;
+      padding: 0 14px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .mobile-menu-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .mobile-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .mobile-brand-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: white;
+      padding: 2px;
+    }
+
+    .mobile-brand-text {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: white;
+      letter-spacing: 0.3px;
+    }
+
+    /* Mobile Bottom Navigation Bar (hidden on desktop) */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+      box-shadow: 0 -3px 14px rgba(0, 0, 0, 0.08);
+      align-items: stretch;
+      justify-content: space-around;
+    }
+
+    .bottom-nav-item {
+      flex: 1;
+      border: none;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px 0;
+      transition: all 0.18s ease;
+      position: relative;
+    }
+
+    .bottom-nav-item svg {
+      width: 22px;
+      height: 22px;
+      transition: transform 0.15s ease;
+    }
+
+    .bottom-nav-item span {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .bottom-nav-item.active {
+      color: var(--accent);
+    }
+
+    .bottom-nav-item.active svg {
+      transform: translateY(-2px);
+    }
+
+    .bottom-nav-icon-wrap {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .bottom-nav-badge {
+      position: absolute;
+      top: -4px;
+      right: -8px;
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      min-width: 17px;
+      height: 17px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      border: 2px solid white;
+    }
+
+    /* POS Mobile Tabs & Floating Cart Pill */
+    .pos-mobile-tabs {
+      display: none;
+      background: #f1e9e3;
+      padding: 4px;
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+      gap: 4px;
+    }
+
+    .pos-mobile-tab {
+      flex: 1;
+      padding: 9px 12px;
+      border: none;
+      background: transparent;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .pos-mobile-tab.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .pos-floating-cart-bar {
+      display: none;
+      position: fixed;
+      bottom: calc(70px + env(safe-area-inset-bottom));
+      left: 14px;
+      right: 14px;
+      background: #4c1015;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 30px;
+      box-shadow: 0 6px 20px rgba(76, 16, 21, 0.4);
+      z-index: 950;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      animation: pulseCart 0.3s ease;
+    }
+
+    @keyframes pulseCart {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .floating-cart-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .floating-cart-icon {
+      font-size: 20px;
+    }
+
+    .floating-cart-count {
+      font-size: 11px;
+      opacity: 0.85;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .floating-cart-total {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fcd34d;
+    }
+
+    /* Media Queries for Screens <= 860px (Tablets & Phones) */
+    @media (max-width: 860px) {
       .app-layout {
-        grid-template-columns: 1fr;
+        display: block;
+        min-height: 100vh;
       }
 
+      .mobile-top-header {
+        display: flex;
+      }
+
+      .mobile-bottom-nav {
+        display: flex;
+      }
+
+      .drawer-backdrop {
+        display: block;
+      }
+
+      .drawer-close-btn {
+        display: flex;
+      }
+
+      /* Sidebar becomes off-canvas drawer */
       .sidebar {
-        height: auto;
-        position: relative;
-        padding: 14px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 290px;
+        max-width: 82vw;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 1100;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 20px 16px;
+        box-shadow: none;
       }
 
-      .brand-header {
-        padding-bottom: 10px;
-      }
-
-      .brand-icon {
-        display: none;
-      }
-
-      .nav-list {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 6px;
-        margin-top: 10px;
-      }
-
-      .nav-item {
-        white-space: nowrap;
-        padding: 9px 12px;
-        font-size: 13px;
-      }
-
-      .sidebar-footer {
-        display: none;
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 28px rgba(0, 0, 0, 0.45);
       }
 
       .main-content {
-        padding: 16px;
+        padding: 12px 14px calc(76px + env(safe-area-inset-bottom)) 14px;
+        max-width: 100%;
       }
 
-      .pos-container {
-        grid-template-columns: 1fr;
-      }
-
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
       .top-bar {
+        margin-bottom: 14px;
+        padding-bottom: 12px;
         flex-direction: column;
         align-items: flex-start;
+        gap: 10px;
+      }
+
+      .top-bar .page-info h1 {
+        font-size: 20px;
+      }
+
+      .top-bar .page-info p {
+        font-size: 12px;
       }
 
       .top-actions {
         width: 100%;
+        display: flex;
         justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
       }
 
+      /* POS Mobile Layout */
+      .pos-mobile-tabs {
+        display: flex;
+      }
+
+      .pos-container {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .pos-catalog-pane {
+        display: block;
+      }
+
+      .pos-cart {
+        display: none;
+      }
+
+      .pos-container.mobile-show-cart .pos-catalog-pane {
+        display: none;
+      }
+
+      .pos-container.mobile-show-cart .pos-cart {
+        display: block;
+      }
+
+      .pos-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        max-height: none;
+      }
+
+      .product-card {
+        padding: 10px;
+        min-height: 120px;
+      }
+
+      .product-pos-thumb {
+        height: 75px;
+      }
+
+      .product-card-title {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .product-card-price {
+        font-size: 14px;
+      }
+
+      /* Dashboard KPIs */
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .kpi-card {
+        padding: 14px 12px;
+      }
+
+      .kpi-value {
+        font-size: 18px;
+      }
+
+      .kpi-label {
+        font-size: 11px;
+      }
+
+      .quick-actions {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .card {
+        padding: 14px;
+        border-radius: var(--radius-md);
+      }
+
+      /* Forms on Mobile */
       .form-grid {
         grid-template-columns: 1fr;
       }
@@ -1281,16 +1631,61 @@
         grid-template-columns: 1fr;
       }
 
+      .form-control {
+        font-size: 15px;
+        padding: 9px 12px;
+      }
+
+      /* Bottom Sheet Modal on Mobile */
+      .modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+      }
+
+      .modal-box {
+        border-radius: 20px 20px 0 0;
+        max-height: 88vh;
+        max-height: 88dvh;
+        width: 100% !important;
+        margin: 0;
+        animation: slideUpSheet 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes slideUpSheet {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+
+      .catalog-tabs {
+        width: 100%;
+        display: flex;
+      }
+
+      .catalog-tab-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .pos-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+      }
+
+      .product-card {
+        padding: 8px;
+      }
+
       .kpi-grid {
         grid-template-columns: 1fr 1fr;
+        gap: 8px;
       }
 
       .kpi-value {
-        font-size: 20px;
-      }
-
-      .quick-actions {
-        grid-template-columns: 1fr;
+        font-size: 16px;
       }
     }
 
@@ -1414,11 +1809,32 @@
 
 <body>
 
+  <!-- Backdrop for mobile off-canvas drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeMobileDrawer()"></div>
+
+  <!-- Mobile Top Header (Fixed on mobile screens) -->
+  <header class="mobile-top-header">
+    <button class="mobile-menu-btn" onclick="toggleMobileDrawer()" aria-label="Menu principal">
+      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="mobile-brand" onclick="navigateTo('dashboard')">
+      <img src="icon.svg" alt="Logo" class="mobile-brand-icon">
+      <span class="mobile-brand-text">Ange Noël</span>
+    </div>
+    <div class="mobile-header-right">
+      <div class="operator-select-wrap" style="padding:4px 8px;">
+        <label for="operatorSelectMobile">👤</label>
+        <select id="operatorSelectMobile" aria-label="Opérateur mobile" onchange="syncMobileOperator(this.value)"></select>
+      </div>
+    </div>
+  </header>
+
   <div class="app-layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
+    <!-- Sidebar / Off-canvas drawer on mobile -->
+    <aside class="sidebar" id="appSidebar">
       <div>
-        <div class="brand-header">
+        <div class="brand-header" style="position:relative;">
+          <button class="drawer-close-btn" onclick="closeMobileDrawer()" aria-label="Fermer le menu">✕</button>
           <div class="brand-icon">
             <img src="icon.svg" alt="Ange Noël Logo">
           </div>
@@ -1651,9 +2067,19 @@
 
       <!-- SECTION 2: POS / CAISSE EXPRESS -->
       <section id="sec-pos" class="view-section">
+        <!-- Mobile Segmented Tabs (Visible on Mobile only) -->
+        <div class="pos-mobile-tabs" id="posMobileTabs">
+          <button class="pos-mobile-tab active" id="tabPosCatalogBtn" onclick="switchPosMobileView('catalog')">
+            🍨 Catalogue
+          </button>
+          <button class="pos-mobile-tab" id="tabPosCartBtn" onclick="switchPosMobileView('cart')">
+            🧾 Mon Panier (<span id="cartCountBadge">0</span>) · <span id="cartTotalSummary">0 F</span>
+          </button>
+        </div>
+
         <div class="pos-container">
           <!-- Catalog Left Pane -->
-          <div>
+          <div class="pos-catalog-pane">
             <div class="pos-catalog-header">
               <input type="text" id="posSearch" class="form-control" placeholder="🔍 Rechercher une gourmandise..."
                 oninput="renderPosCatalog()" style="flex:1;">
@@ -1745,6 +2171,18 @@
               </button>
             </div>
           </div>
+        </div>
+
+        <!-- Floating Cart Bar on Mobile -->
+        <div class="pos-floating-cart-bar" id="posFloatingCartBar" onclick="switchPosMobileView('cart')" style="display:none;">
+          <div class="floating-cart-info">
+            <span class="floating-cart-icon">🛒</span>
+            <div>
+              <div class="floating-cart-count" id="floatingCartCount">0 article</div>
+              <div class="floating-cart-total" id="floatingCartTotal">0 F CFA</div>
+            </div>
+          </div>
+          <button class="btn btn-accent btn-sm" style="pointer-events:none; border-radius:20px; padding:6px 14px;">Voir le Panier →</button>
         </div>
       </section>
 
@@ -2047,7 +2485,8 @@
       <!-- SECTION 8: PRODUCTS & CATEGORIES CATALOG -->
       <section id="sec-products" class="view-section">
         <!-- Catalog TabLayout Navigation -->
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
           <div class="catalog-tabs">
             <button class="catalog-tab-btn active" id="tabBtnProducts" onclick="switchCatalogTab('products')">
               🍨 Produits <span class="tab-badge" id="countProductsBadge">0</span>
@@ -2064,14 +2503,19 @@
             <div class="card-header" style="flex-wrap:wrap; gap:12px;">
               <div>
                 <h3 class="card-title">🍨 Gestion des Produits & Gourmandises</h3>
-                <p style="color:var(--text-muted); font-size:13px;">Gérez vos articles, prix, descriptions, images et stocks</p>
+                <p style="color:var(--text-muted); font-size:13px;">Gérez vos articles, prix, descriptions, images et
+                  stocks</p>
               </div>
               <div class="catalog-filter-bar">
-                <input type="text" id="catalogProductSearch" class="form-control" style="width:190px; padding:6px 12px; font-size:13px;" placeholder="🔍 Nom, saveur..." oninput="renderProductsTable()">
-                <select id="catalogProductCatFilter" class="form-control" style="width:160px; padding:6px 10px; font-size:13px;" onchange="renderProductsTable()">
+                <input type="text" id="catalogProductSearch" class="form-control"
+                  style="width:190px; padding:6px 12px; font-size:13px;" placeholder="🔍 Nom, saveur..."
+                  oninput="renderProductsTable()">
+                <select id="catalogProductCatFilter" class="form-control"
+                  style="width:160px; padding:6px 10px; font-size:13px;" onchange="renderProductsTable()">
                   <option value="all">Toutes catégories</option>
                 </select>
-                <select id="catalogProductStockFilter" class="form-control" style="width:140px; padding:6px 10px; font-size:13px;" onchange="renderProductsTable()">
+                <select id="catalogProductStockFilter" class="form-control"
+                  style="width:140px; padding:6px 10px; font-size:13px;" onchange="renderProductsTable()">
                   <option value="all">Tous stocks</option>
                   <option value="in_stock">En stock (>5)</option>
                   <option value="low_stock">Stock faible (≤5)</option>
@@ -2106,10 +2550,13 @@
             <div class="card-header" style="flex-wrap:wrap; gap:12px;">
               <div>
                 <h3 class="card-title">🏷️ Gestion des Catégories</h3>
-                <p style="color:var(--text-muted); font-size:13px;">Créez et organisez vos familles de produits avec nom, description et visuel</p>
+                <p style="color:var(--text-muted); font-size:13px;">Créez et organisez vos familles de produits avec
+                  nom, description et visuel</p>
               </div>
               <div class="catalog-filter-bar">
-                <input type="text" id="catalogCategorySearch" class="form-control" style="width:230px; padding:6px 12px; font-size:13px;" placeholder="🔍 Filtrer les catégories..." oninput="renderCategoriesView()">
+                <input type="text" id="catalogCategorySearch" class="form-control"
+                  style="width:230px; padding:6px 12px; font-size:13px;" placeholder="🔍 Filtrer les catégories..."
+                  oninput="renderCategoriesView()">
                 <button class="btn btn-accent btn-sm" onclick="openNewCategoryModal()">＋ Nouvelle Catégorie</button>
               </div>
             </div>
@@ -2343,18 +2790,21 @@
           </div>
           <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:24px;">
             <input type="checkbox" id="prodTrackStock" checked style="width:18px; height:18px; cursor:pointer;">
-            <label for="prodTrackStock" style="font-size:13px; cursor:pointer; font-weight:600;">Suivi & Alerte stock</label>
+            <label for="prodTrackStock" style="font-size:13px; cursor:pointer; font-weight:600;">Suivi & Alerte
+              stock</label>
           </div>
           <div class="form-group col-full">
             <label class="form-label">URL de l'image (optionnel)</label>
-            <input type="url" id="prodImageUrl" class="form-control" placeholder="https://example.com/image.jpg" oninput="previewImgBox(this.value, 'prodImgPreview')">
+            <input type="url" id="prodImageUrl" class="form-control" placeholder="https://example.com/image.jpg"
+              oninput="previewImgBox(this.value, 'prodImgPreview')">
             <div id="prodImgPreview" class="img-preview-box">
               <span style="color:var(--text-muted); font-size:12px;">📷 Aucun aperçu d'image</span>
             </div>
           </div>
           <div class="form-group col-full">
             <label class="form-label">Description & Ingrédients (optionnel)</label>
-            <textarea id="prodDesc" class="form-control" rows="2" placeholder="Parfum, composition, garniture, format..."></textarea>
+            <textarea id="prodDesc" class="form-control" rows="2"
+              placeholder="Parfum, composition, garniture, format..."></textarea>
           </div>
         </div>
       </div>
@@ -2398,14 +2848,16 @@
           </div>
           <div class="form-group col-full">
             <label class="form-label">URL de l'image / Bannière (optionnel)</label>
-            <input type="url" id="catImageUrl" class="form-control" placeholder="https://example.com/categorie.jpg" oninput="previewImgBox(this.value, 'catImgPreview')">
+            <input type="url" id="catImageUrl" class="form-control" placeholder="https://example.com/categorie.jpg"
+              oninput="previewImgBox(this.value, 'catImgPreview')">
             <div id="catImgPreview" class="img-preview-box">
               <span style="color:var(--text-muted); font-size:12px;">🖼️ Aucun aperçu d'image</span>
             </div>
           </div>
           <div class="form-group col-full">
             <label class="form-label">Description de la catégorie (optionnel)</label>
-            <textarea id="catDescription" class="form-control" rows="3" placeholder="Description de cette famille de gourmandises..."></textarea>
+            <textarea id="catDescription" class="form-control" rows="3"
+              placeholder="Description de cette famille de gourmandises..."></textarea>
           </div>
         </div>
       </div>
@@ -2543,6 +2995,37 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobile Bottom Navigation Bar (Fixed at bottom on phones/tablets) -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button class="bottom-nav-item" data-page="pos" onclick="navigateTo('pos')">
+      <div class="bottom-nav-icon-wrap">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <span class="bottom-nav-badge" id="bottomNavCartBadge" style="display:none;">0</span>
+      </div>
+      <span>Caisse</span>
+    </button>
+
+    <button class="bottom-nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>Tableau</span>
+    </button>
+
+    <button class="bottom-nav-item" data-page="products" onclick="navigateTo('products')">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      <span>Catalogue</span>
+    </button>
+
+    <button class="bottom-nav-item" data-page="expenses" onclick="navigateTo('expenses')">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span>Dépenses</span>
+    </button>
+
+    <button class="bottom-nav-item" onclick="openMobileDrawer()">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Menu</span>
+    </button>
+  </nav>
 
   <!-- Toasts container -->
   <div class="toast-container" id="toastContainer"></div>
@@ -2775,7 +3258,7 @@
     }
 
     function activeOperator() {
-      return val('operatorSelect') || (data.users && data.users[0]) || 'Opérateur';
+      return val('operatorSelect') || val('operatorSelectMobile') || (data.users && data.users[0]) || 'Opérateur';
     }
 
     /* =========================================================================
@@ -3103,6 +3586,11 @@ ${itemsLines}${discountText}
         `;
         el('cartCount').textContent = '0';
         el('cartGrandTotal').textContent = '0 F CFA';
+
+        if (el('bottomNavCartBadge')) el('bottomNavCartBadge').style.display = 'none';
+        if (el('cartCountBadge')) el('cartCountBadge').textContent = '0';
+        if (el('cartTotalSummary')) el('cartTotalSummary').textContent = '0 F';
+        if (el('posFloatingCartBar')) el('posFloatingCartBar').style.display = 'none';
         return;
       }
 
@@ -3135,6 +3623,26 @@ ${itemsLines}${discountText}
 
       el('cartCount').textContent = String(totalQty);
       el('cartGrandTotal').textContent = money(grandTotal);
+
+      // Sync Mobile Elements
+      const bNavBadge = el('bottomNavCartBadge');
+      if (bNavBadge) {
+        bNavBadge.style.display = totalQty > 0 ? 'flex' : 'none';
+        bNavBadge.textContent = String(totalQty);
+      }
+      if (el('cartCountBadge')) el('cartCountBadge').textContent = String(totalQty);
+      if (el('cartTotalSummary')) el('cartTotalSummary').textContent = money(grandTotal);
+
+      const floatBar = el('posFloatingCartBar');
+      if (floatBar) {
+        if (totalQty > 0 && currentPosMobileView === 'catalog') {
+          floatBar.style.display = 'flex';
+          el('floatingCartCount').textContent = `${totalQty} article${totalQty > 1 ? 's' : ''}`;
+          el('floatingCartTotal').textContent = money(grandTotal);
+        } else {
+          floatBar.style.display = 'none';
+        }
+      }
     }
 
     function openCustomItemModal() {
@@ -3853,7 +4361,7 @@ ${itemsLines}${discountText}
       const catFilter = el('catalogProductCatFilter');
       if (catFilter) {
         const curVal = catFilter.value;
-        catFilter.innerHTML = '<option value="all">Toutes catégories</option>' + 
+        catFilter.innerHTML = '<option value="all">Toutes catégories</option>' +
           data.categories.map(c => `<option value="${escapeHtml(c.name)}" ${c.name === curVal ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('');
       }
 
@@ -3967,7 +4475,7 @@ ${itemsLines}${discountText}
       const stockQty = p.stock !== undefined ? p.stock : 25;
       const stockClass = !p.trackStock ? 'stock-ok' : (stockQty <= 0 ? 'stock-empty' : (stockQty <= 5 ? 'stock-low' : 'stock-ok'));
       const stockLabel = !p.trackStock ? 'Non suivi' : (stockQty <= 0 ? '❌ Épuisé (0)' : (stockQty <= 5 ? `⚠️ Faible (${stockQty})` : `📦 ${stockQty} en stock`));
-      
+
       const body = el('viewProductBody');
       body.innerHTML = `
         <div class="view-detail-card">
@@ -4754,10 +5262,14 @@ ${itemsLines}${discountText}
       el('initCashInput').value = data.openingCash || 0;
       el('initMomoInput').value = data.openingMomo || 0;
 
-      // Operator dropdown
+      // Operator dropdowns (Desktop & Mobile)
       const opSelect = el('operatorSelect');
-      const curOp = opSelect.value;
-      opSelect.innerHTML = data.users.map(u => `<option ${u === curOp ? 'selected' : ''}>${escapeHtml(u)}</option>`).join('');
+      const curOp = opSelect ? opSelect.value : '';
+      const opOptions = data.users.map(u => `<option ${u === curOp ? 'selected' : ''}>${escapeHtml(u)}</option>`).join('');
+      if (opSelect) opSelect.innerHTML = opOptions;
+
+      const opSelectMobile = el('operatorSelectMobile');
+      if (opSelectMobile) opSelectMobile.innerHTML = opOptions;
 
       // Expense categories dropdown
       el('expCategory').innerHTML = data.expenseCats.map(c => `<option>${escapeHtml(c)}</option>`).join('');
@@ -5038,6 +5550,12 @@ ${itemsLines}${discountText}
         btn.classList.toggle('active', btn.dataset.page === pageId);
       });
 
+      document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.page === pageId);
+      });
+
+      closeMobileDrawer();
+
       const titles = {
         dashboard: ['Tableau de Bord', 'Gestion financière et commerciale au quotidien'],
         pos: ['Caisse Express & Ventes', 'Point de vente rapide et impression de ticket'],
@@ -5059,6 +5577,7 @@ ${itemsLines}${discountText}
       if (pageId === 'credits') renderCredits();
       if (pageId === 'products') switchCatalogTab(currentCatalogTab);
       if (pageId === 'cash') calculateClosingPreview();
+      if (pageId === 'pos') switchPosMobileView('catalog');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -5066,6 +5585,62 @@ ${itemsLines}${discountText}
     document.querySelectorAll('.nav-item').forEach(btn => {
       btn.addEventListener('click', () => navigateTo(btn.dataset.page));
     });
+
+    /* =========================================================================
+       MOBILE NAVIGATION & POS VIEW HELPERS
+       ========================================================================= */
+    let currentPosMobileView = 'catalog';
+
+    function openMobileDrawer() {
+      const sb = el('appSidebar');
+      const bd = el('drawerBackdrop');
+      if (sb) sb.classList.add('open');
+      if (bd) bd.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileDrawer() {
+      const sb = el('appSidebar');
+      const bd = el('drawerBackdrop');
+      if (sb) sb.classList.remove('open');
+      if (bd) bd.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function toggleMobileDrawer() {
+      const sb = el('appSidebar');
+      if (sb && sb.classList.contains('open')) {
+        closeMobileDrawer();
+      } else {
+        openMobileDrawer();
+      }
+    }
+
+    function syncMobileOperator(v) {
+      if (el('operatorSelect')) el('operatorSelect').value = v;
+    }
+
+    function switchPosMobileView(view) {
+      currentPosMobileView = view;
+      const tabCat = el('tabPosCatalogBtn');
+      const tabCart = el('tabPosCartBtn');
+      const posContainer = document.querySelector('.pos-container');
+      const floatBar = el('posFloatingCartBar');
+
+      if (!tabCat || !tabCart || !posContainer) return;
+
+      if (view === 'cart') {
+        tabCart.classList.add('active');
+        tabCat.classList.remove('active');
+        posContainer.classList.add('mobile-show-cart');
+        if (floatBar) floatBar.style.display = 'none';
+      } else {
+        tabCat.classList.add('active');
+        tabCart.classList.remove('active');
+        posContainer.classList.remove('mobile-show-cart');
+        if (floatBar && cart.length > 0) floatBar.style.display = 'flex';
+      }
+    }
 
     function openModal(id) {
       el(id).classList.add('open');
