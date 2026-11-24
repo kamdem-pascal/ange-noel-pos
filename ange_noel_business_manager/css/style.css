@@ -1465,6 +1465,11 @@
 
       .drawer-backdrop {
         display: block;
+        pointer-events: none; /* ne bloque les clics que quand il est open */
+      }
+
+      .drawer-backdrop.open {
+        pointer-events: auto;
       }
 
       .drawer-close-btn {
@@ -1492,34 +1497,15 @@
         box-shadow: 4px 0 28px rgba(0, 0, 0, 0.45);
       }
 
+      /* CRITIQUE : compenser le header mobile fixe de 56px */
       .main-content {
-        padding: 12px 14px calc(76px + env(safe-area-inset-bottom)) 14px;
+        padding: calc(68px + env(safe-area-inset-top)) 14px calc(76px + env(safe-area-inset-bottom)) 14px;
         max-width: 100%;
       }
 
+      /* Masquer la top-bar desktop sur mobile (remplacée par le header fixe mobile) */
       .top-bar {
-        margin-bottom: 14px;
-        padding-bottom: 12px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-
-      .top-bar .page-info h1 {
-        font-size: 20px;
-      }
-
-      .top-bar .page-info p {
-        font-size: 12px;
-      }
-
-      .top-actions {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
+        display: none;
       }
 
       /* POS Mobile Layout */

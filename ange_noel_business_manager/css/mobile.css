@@ -14,6 +14,7 @@
   background: rgba(0, 0, 0, 0.55);
   z-index: 1050;
   opacity: 0;
+  pointer-events: none; /* ne bloque JAMAIS les clics quand invisible */
   transition: opacity 0.25s ease;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
@@ -22,6 +23,7 @@
 .drawer-backdrop.open {
   display: block;
   opacity: 1;
+  pointer-events: auto; /* bloque seulement quand le drawer est ouvert */
 }
 
 .drawer-close-btn {
@@ -297,8 +299,13 @@
   }
 
   .main-content {
-    padding: 12px 14px calc(76px + env(safe-area-inset-bottom)) 14px;
+    padding: calc(68px + env(safe-area-inset-top)) 14px calc(76px + env(safe-area-inset-bottom)) 14px;
     max-width: 100%;
+  }
+
+  /* Masquer la top-bar desktop sur mobile */
+  .top-bar {
+    display: none;
   }
 
   .top-bar {

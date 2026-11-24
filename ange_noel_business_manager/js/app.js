@@ -1103,6 +1103,8 @@ function navigateTo(pageId) {
   const [heading, sub] = titles[pageId] || ['Ange Noël Manager', ''];
   if (el('pageHeading')) el('pageHeading').textContent = heading;
   if (el('pageSubHeading')) el('pageSubHeading').textContent = sub;
+  // Mettre à jour le titre dans le header mobile
+  if (el('mobileBrandTitle')) el('mobileBrandTitle').textContent = heading.split(' ').slice(0, 2).join(' ');
 
   if (pageId === 'history') renderHistory();
   if (pageId === 'reports') renderReport();
@@ -1636,7 +1638,7 @@ window.closeMobileDrawer = closeMobileDrawer;
 window.toggleMobileDrawer = toggleMobileDrawer;
 window.switchCatalogTab = switchCatalogTab;
 window.switchPosMobileView = switchPosMobileView;
-window.syncMobileOperator = (v) => { if (el('operatorSelect')) el('operatorSelect').value = v; };
+window.syncMobileOperator = (v) => { handleOperatorChange(v); };
 
 // POS
 window.setPosCatFilter = setPosCatFilter;
