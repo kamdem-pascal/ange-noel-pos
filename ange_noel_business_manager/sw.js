@@ -36,7 +36,7 @@ self.addEventListener('fetch', (e) => {
           if (networkRes && networkRes.status === 200) {
             caches.open(CACHE).then((cache) => cache.put(e.request, networkRes.clone()));
           }
-        }).catch(() => {});
+        }).catch(() => { });
         return cached;
       }
       return fetch(e.request).then((networkRes) => {

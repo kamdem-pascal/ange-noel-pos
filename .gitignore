@@ -1,3 +1,7 @@
 ﻿Antigravity IDE.exe
 backups/
 *.zip
+deploy/
+__pycache__/
+_check.js
+temp_check.js
