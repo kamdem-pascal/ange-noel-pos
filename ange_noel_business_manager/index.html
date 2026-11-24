@@ -1293,6 +1293,122 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* =========================================================================
+       CATALOG TABLAYOUT & ENHANCED CRUD STYLES
+       ========================================================================= */
+    .catalog-tabs {
+      display: inline-flex;
+      background: #f1e9e3;
+      padding: 5px;
+      border-radius: var(--radius-md);
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .catalog-tab-btn {
+      padding: 9px 20px;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .catalog-tab-btn:hover {
+      color: var(--primary);
+    }
+
+    .catalog-tab-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(100, 27, 32, 0.08);
+    }
+
+    .tab-badge {
+      font-size: 11px;
+      background: rgba(100, 27, 32, 0.08);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .catalog-tab-btn.active .tab-badge {
+      background: var(--accent);
+      color: white;
+    }
+
+    .catalog-filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .img-thumb {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #faf4ef;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .img-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .img-preview-box {
+      width: 100%;
+      height: 130px;
+      border-radius: var(--radius-sm);
+      border: 2px dashed var(--border);
+      background: #faf6f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-top: 6px;
+      position: relative;
+    }
+
+    .img-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .view-detail-card {
+      background: #fdfbf8;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .product-pos-thumb {
+      width: 100%;
+      height: 85px;
+      border-radius: 6px;
+      object-fit: cover;
+      margin-bottom: 8px;
+      background: #faf4ef;
+      border: 1px solid var(--border);
+    }
   </style>
 </head>
 
@@ -1928,31 +2044,90 @@
         </div>
       </section>
 
-      <!-- SECTION 8: PRODUCTS CATALOG -->
+      <!-- SECTION 8: PRODUCTS & CATEGORIES CATALOG -->
       <section id="sec-products" class="view-section">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3 class="card-title">🍨 Catalogue des Gourmandises & Prix</h3>
-              <p style="color:var(--text-muted); font-size:13px;">Gérez vos produits, prix de vente et catégories</p>
-            </div>
-            <button class="btn btn-accent btn-sm" onclick="openNewProductModal()">＋ Ajouter un Produit</button>
+        <!-- Catalog TabLayout Navigation -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <div class="catalog-tabs">
+            <button class="catalog-tab-btn active" id="tabBtnProducts" onclick="switchCatalogTab('products')">
+              🍨 Produits <span class="tab-badge" id="countProductsBadge">0</span>
+            </button>
+            <button class="catalog-tab-btn" id="tabBtnCategories" onclick="switchCatalogTab('categories')">
+              🏷️ Catégories <span class="tab-badge" id="countCategoriesBadge">0</span>
+            </button>
           </div>
+        </div>
 
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Catégorie</th>
-                  <th>Nom du Produit</th>
-                  <th>Prix Unitaire</th>
-                  <th>Stock Disponible</th>
-                  <th>Statut</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="productsTableRows"></tbody>
-            </table>
+        <!-- PANE 1: PRODUITS -->
+        <div id="paneProducts" class="catalog-pane">
+          <div class="card">
+            <div class="card-header" style="flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 class="card-title">🍨 Gestion des Produits & Gourmandises</h3>
+                <p style="color:var(--text-muted); font-size:13px;">Gérez vos articles, prix, descriptions, images et stocks</p>
+              </div>
+              <div class="catalog-filter-bar">
+                <input type="text" id="catalogProductSearch" class="form-control" style="width:190px; padding:6px 12px; font-size:13px;" placeholder="🔍 Nom, saveur..." oninput="renderProductsTable()">
+                <select id="catalogProductCatFilter" class="form-control" style="width:160px; padding:6px 10px; font-size:13px;" onchange="renderProductsTable()">
+                  <option value="all">Toutes catégories</option>
+                </select>
+                <select id="catalogProductStockFilter" class="form-control" style="width:140px; padding:6px 10px; font-size:13px;" onchange="renderProductsTable()">
+                  <option value="all">Tous stocks</option>
+                  <option value="in_stock">En stock (>5)</option>
+                  <option value="low_stock">Stock faible (≤5)</option>
+                  <option value="out_stock">Épuisé (0)</option>
+                </select>
+                <button class="btn btn-accent btn-sm" onclick="openNewProductModal()">＋ Nouveau Produit</button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:60px;">Visuel</th>
+                    <th>Nom & Description</th>
+                    <th>Catégorie</th>
+                    <th>Prix Unitaire</th>
+                    <th>Stock</th>
+                    <th>Statut</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="productsTableRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANE 2: CATÉGORIES -->
+        <div id="paneCategories" class="catalog-pane" style="display:none;">
+          <div class="card">
+            <div class="card-header" style="flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 class="card-title">🏷️ Gestion des Catégories</h3>
+                <p style="color:var(--text-muted); font-size:13px;">Créez et organisez vos familles de produits avec nom, description et visuel</p>
+              </div>
+              <div class="catalog-filter-bar">
+                <input type="text" id="catalogCategorySearch" class="form-control" style="width:230px; padding:6px 12px; font-size:13px;" placeholder="🔍 Filtrer les catégories..." oninput="renderCategoriesView()">
+                <button class="btn btn-accent btn-sm" onclick="openNewCategoryModal()">＋ Nouvelle Catégorie</button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:60px;">Visuel</th>
+                    <th>Nom de la Catégorie</th>
+                    <th>Description</th>
+                    <th>Nombre de Produits</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="categoriesTableRows"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -2142,7 +2317,7 @@
 
   <!-- Modal: Nouveau / Édition Produit Catalogue -->
   <div class="modal-overlay" id="modalProductForm">
-    <div class="modal-box">
+    <div class="modal-box" style="max-width:560px;">
       <div class="modal-head">
         <h3 id="productModalTitle">Nouveau Produit</h3>
         <button class="modal-close" onclick="closeModal('modalProductForm')">✕</button>
@@ -2151,31 +2326,109 @@
         <input type="hidden" id="prodEditId">
         <div class="form-grid">
           <div class="form-group col-full">
-            <label class="form-label">Nom de la gourmandise</label>
+            <label class="form-label">Nom de la gourmandise *</label>
             <input type="text" id="prodName" class="form-control" placeholder="Ex: Magnum Vanille Pécan">
           </div>
           <div class="form-group">
-            <label class="form-label">Catégorie</label>
+            <label class="form-label">Catégorie *</label>
             <select id="prodCategory" class="form-control"></select>
           </div>
           <div class="form-group">
-            <label class="form-label">Prix de vente (F CFA)</label>
+            <label class="form-label">Prix de vente (F CFA) *</label>
             <input type="number" id="prodPrice" class="form-control" placeholder="Ex: 1200" min="0">
           </div>
           <div class="form-group">
             <label class="form-label">Stock Initial / Actuel</label>
             <input type="number" id="prodStock" class="form-control" placeholder="Ex: 25" min="0" value="25">
           </div>
-          <div class="form-group col-full" style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+          <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:24px;">
             <input type="checkbox" id="prodTrackStock" checked style="width:18px; height:18px; cursor:pointer;">
-            <label for="prodTrackStock" style="font-size:13.5px; cursor:pointer;">Activer le suivi et l'alerte de stock
-              pour ce produit</label>
+            <label for="prodTrackStock" style="font-size:13px; cursor:pointer; font-weight:600;">Suivi & Alerte stock</label>
+          </div>
+          <div class="form-group col-full">
+            <label class="form-label">URL de l'image (optionnel)</label>
+            <input type="url" id="prodImageUrl" class="form-control" placeholder="https://example.com/image.jpg" oninput="previewImgBox(this.value, 'prodImgPreview')">
+            <div id="prodImgPreview" class="img-preview-box">
+              <span style="color:var(--text-muted); font-size:12px;">📷 Aucun aperçu d'image</span>
+            </div>
+          </div>
+          <div class="form-group col-full">
+            <label class="form-label">Description & Ingrédients (optionnel)</label>
+            <textarea id="prodDesc" class="form-control" rows="2" placeholder="Parfum, composition, garniture, format..."></textarea>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal('modalProductForm')">Annuler</button>
         <button class="btn btn-primary" onclick="saveProductForm()">Enregistrer le Produit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Consultation / Fiche Produit -->
+  <div class="modal-overlay" id="modalViewProduct">
+    <div class="modal-box" style="max-width:500px;">
+      <div class="modal-head">
+        <h3>Fiche Produit</h3>
+        <button class="modal-close" onclick="closeModal('modalViewProduct')">✕</button>
+      </div>
+      <div class="modal-body" id="viewProductBody">
+        <!-- Rendu dynamique -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modalViewProduct')">Fermer</button>
+        <button class="btn btn-primary" id="viewProductEditBtn">✏️ Modifier ce Produit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Nouvelle / Édition Catégorie -->
+  <div class="modal-overlay" id="modalCategoryForm">
+    <div class="modal-box" style="max-width:520px;">
+      <div class="modal-head">
+        <h3 id="categoryModalTitle">Nouvelle Catégorie</h3>
+        <button class="modal-close" onclick="closeModal('modalCategoryForm')">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="catEditId">
+        <div class="form-grid">
+          <div class="form-group col-full">
+            <label class="form-label">Nom de la catégorie *</label>
+            <input type="text" id="catName" class="form-control" placeholder="Ex: Magnums, Crèmes Glacées...">
+          </div>
+          <div class="form-group col-full">
+            <label class="form-label">URL de l'image / Bannière (optionnel)</label>
+            <input type="url" id="catImageUrl" class="form-control" placeholder="https://example.com/categorie.jpg" oninput="previewImgBox(this.value, 'catImgPreview')">
+            <div id="catImgPreview" class="img-preview-box">
+              <span style="color:var(--text-muted); font-size:12px;">🖼️ Aucun aperçu d'image</span>
+            </div>
+          </div>
+          <div class="form-group col-full">
+            <label class="form-label">Description de la catégorie (optionnel)</label>
+            <textarea id="catDescription" class="form-control" rows="3" placeholder="Description de cette famille de gourmandises..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modalCategoryForm')">Annuler</button>
+        <button class="btn btn-primary" onclick="saveCategoryForm()">Enregistrer la Catégorie</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Consultation / Fiche Catégorie -->
+  <div class="modal-overlay" id="modalViewCategory">
+    <div class="modal-box" style="max-width:560px;">
+      <div class="modal-head">
+        <h3>Fiche Catégorie</h3>
+        <button class="modal-close" onclick="closeModal('modalViewCategory')">✕</button>
+      </div>
+      <div class="modal-body" id="viewCategoryBody">
+        <!-- Rendu dynamique -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modalViewCategory')">Fermer</button>
+        <button class="btn btn-primary" id="viewCategoryEditBtn">✏️ Modifier cette Catégorie</button>
       </div>
     </div>
   </div>
@@ -2410,7 +2663,18 @@
           { id: 'bx1', name: 'Smoothie / Jus Naturel', category: 'Boissons & Extras', price: 1000, stock: 30, trackStock: true, active: true },
 
           // ═══ LIVRAISONS ═══
-          { id: 'lv1', name: 'Frais de Livraison Douala', category: 'Livraisons', price: 1000, stock: 99, trackStock: false, active: true }
+          { id: 'lv1', name: 'Frais de Livraison Douala', category: 'Livraisons', price: 1000, stock: 99, trackStock: false, active: true, imageUrl: '', description: 'Livraison express partout à Douala' }
+        ],
+        categories: [
+          { id: 'cat_magnums', name: 'Magnums', description: 'Bâtonnets glacés enrobés de chocolat croustillant', imageUrl: '' },
+          { id: 'cat_panees', name: 'Glaces panées', description: 'Glaces artisanales avec panure croustillante', imageUrl: '' },
+          { id: 'cat_cremes', name: 'Crèmes glacées', description: 'Pots et bacs de crèmes glacées onctueuses classiques', imageUrl: '' },
+          { id: 'cat_crush', name: 'Glace Ange Crush', description: 'Créations gourmandes garnies de toppings généreux', imageUrl: '' },
+          { id: 'cat_alcool', name: 'Glace Alcoolisée', description: 'Gourmandises parfumées aux liqueurs fines (Baillys)', imageUrl: '' },
+          { id: 'cat_spec', name: 'Commandes spéciales', description: 'Gâteaux glacés personnalisés et créations sur-mesure', imageUrl: '' },
+          { id: 'cat_livr', name: 'Livraisons', description: 'Frais de livraison à domicile partout à Douala', imageUrl: '' },
+          { id: 'cat_boiss', name: 'Boissons & Extras', description: 'Smoothies frais, jus naturels et accompagnements', imageUrl: '' },
+          { id: 'cat_autres', name: 'Autres', description: 'Autres articles et prestations diverses', imageUrl: '' }
         ],
         revenueCats: [
           'Magnums',
@@ -2459,8 +2723,25 @@
         parsed.products.forEach(p => {
           if (p.stock === undefined) p.stock = 25;
           if (p.trackStock === undefined) p.trackStock = true;
+          if (p.description === undefined) p.description = '';
+          if (p.imageUrl === undefined) p.imageUrl = '';
         });
-        parsed.revenueCats = Array.isArray(parsed.revenueCats) ? parsed.revenueCats : def.revenueCats;
+
+        // Migrate categories structure
+        if (!Array.isArray(parsed.categories) || !parsed.categories.length) {
+          const catList = Array.isArray(parsed.revenueCats) && parsed.revenueCats.length ? parsed.revenueCats : def.revenueCats;
+          parsed.categories = catList.map((cName, idx) => {
+            const defCat = def.categories.find(dc => dc.name.toLowerCase() === cName.toLowerCase());
+            return {
+              id: defCat ? defCat.id : 'cat_' + Date.now() + '_' + idx,
+              name: cName,
+              description: defCat ? defCat.description : '',
+              imageUrl: defCat ? defCat.imageUrl : ''
+            };
+          });
+        }
+        parsed.revenueCats = parsed.categories.map(c => c.name);
+
         parsed.expenseCats = Array.isArray(parsed.expenseCats) ? parsed.expenseCats : def.expenseCats;
         parsed.users = Array.isArray(parsed.users) ? parsed.users : def.users;
         parsed.ops = Array.isArray(parsed.ops) ? parsed.ops : [];
@@ -2754,12 +3035,16 @@ ${itemsLines}${discountText}
         const isOutOfStock = p.trackStock && stockQty <= 0;
         const stockClass = !p.trackStock ? 'stock-ok' : (stockQty <= 0 ? 'stock-empty' : (stockQty <= 5 ? 'stock-low' : 'stock-ok'));
         const stockText = !p.trackStock ? '' : (stockQty <= 0 ? '❌ Épuisé' : (stockQty <= 5 ? `⚠️ Reste ${stockQty}` : `📦 Stock: ${stockQty}`));
+        const imgBlock = p.imageUrl ? `<img src="${escapeHtml(p.imageUrl)}" alt="${escapeHtml(p.name)}" class="product-pos-thumb" onerror="this.style.display='none'">` : '';
+        const descBlock = p.description ? `<div style="font-size:11.5px; color:var(--text-muted); margin-bottom:4px; max-height:28px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">${escapeHtml(p.description)}</div>` : '';
 
         return `
         <div class="product-card ${isOutOfStock ? 'disabled-card' : ''}" onclick="${isOutOfStock ? "showToast('Produit actuellement épuisé en stock !', 'error')" : `addToCart('${p.id}')`}">
+          ${imgBlock}
           <div>
             <div class="product-card-cat">${escapeHtml(p.category)}</div>
             <div class="product-card-title">${escapeHtml(p.name)}</div>
+            ${descBlock}
             ${p.trackStock ? `<div class="stock-badge ${stockClass}">${stockText}</div>` : ''}
           </div>
           <div class="product-card-price">${money(p.price)}</div>
@@ -3520,39 +3805,116 @@ ${itemsLines}${discountText}
     }
 
     /* =========================================================================
-       PRODUCTS CATALOG MANAGEMENT
+       PRODUCTS & CATEGORIES CATALOG MANAGEMENT (TABLAYOUT & DYNAMIC CRUD)
        ========================================================================= */
+    let currentCatalogTab = 'products';
+
+    function previewImgBox(url, boxId) {
+      const box = el(boxId);
+      if (!box) return;
+      const clean = (url || '').trim();
+      if (!clean) {
+        box.innerHTML = `<span style="color:var(--text-muted); font-size:12px;">📷 Aucun aperçu d'image</span>`;
+        return;
+      }
+      box.innerHTML = `<img src="${escapeHtml(clean)}" onerror="this.onerror=null; this.parentElement.innerHTML='<span style=\\'color:#ef4444; font-size:12px;\\'>⚠️ Image non accessible</span>';">`;
+    }
+
+    function switchCatalogTab(tab) {
+      currentCatalogTab = tab;
+      const btnProd = el('tabBtnProducts');
+      const btnCat = el('tabBtnCategories');
+      const paneProd = el('paneProducts');
+      const paneCat = el('paneCategories');
+
+      if (!btnProd || !btnCat || !paneProd || !paneCat) return;
+
+      if (tab === 'products') {
+        btnProd.classList.add('active');
+        btnCat.classList.remove('active');
+        paneProd.style.display = 'block';
+        paneCat.style.display = 'none';
+        renderProductsTable();
+      } else {
+        btnCat.classList.add('active');
+        btnProd.classList.remove('active');
+        paneCat.style.display = 'block';
+        paneProd.style.display = 'none';
+        renderCategoriesView();
+      }
+    }
+
+    // --- PRODUITS ---
     function renderProductsTable() {
       const tbody = el('productsTableRows');
-      if (!data.products.length) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:25px; color:var(--text-muted);">Aucun produit dans le catalogue.</td></tr>';
+      if (!tbody) return;
+
+      // Update Category Filter options dynamically
+      const catFilter = el('catalogProductCatFilter');
+      if (catFilter) {
+        const curVal = catFilter.value;
+        catFilter.innerHTML = '<option value="all">Toutes catégories</option>' + 
+          data.categories.map(c => `<option value="${escapeHtml(c.name)}" ${c.name === curVal ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('');
+      }
+
+      // Update product badge count
+      if (el('countProductsBadge')) {
+        el('countProductsBadge').textContent = data.products.length;
+      }
+
+      const q = (val('catalogProductSearch') || '').toLowerCase().trim();
+      const selCat = val('catalogProductCatFilter') || 'all';
+      const selStock = val('catalogProductStockFilter') || 'all';
+
+      const filtered = data.products.filter(p => {
+        const matchesQuery = !q || p.name.toLowerCase().includes(q) || (p.description && p.description.toLowerCase().includes(q)) || p.category.toLowerCase().includes(q);
+        const matchesCat = selCat === 'all' || p.category === selCat;
+        const stockQty = p.stock !== undefined ? p.stock : 25;
+        let matchesStock = true;
+        if (selStock === 'in_stock') matchesStock = !p.trackStock || stockQty > 5;
+        else if (selStock === 'low_stock') matchesStock = p.trackStock && stockQty > 0 && stockQty <= 5;
+        else if (selStock === 'out_stock') matchesStock = p.trackStock && stockQty <= 0;
+        return matchesQuery && matchesCat && matchesStock;
+      });
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">Aucun produit ne correspond aux filtres.</td></tr>';
         return;
       }
 
-      tbody.innerHTML = data.products.map(p => {
+      tbody.innerHTML = filtered.map(p => {
         const stockQty = p.stock !== undefined ? p.stock : 25;
         const stockClass = !p.trackStock ? 'stock-ok' : (stockQty <= 0 ? 'stock-empty' : (stockQty <= 5 ? 'stock-low' : 'stock-ok'));
         const stockLabel = !p.trackStock ? 'Non suivi' : (stockQty <= 0 ? '❌ Épuisé (0)' : (stockQty <= 5 ? `⚠️ Faible (${stockQty})` : `📦 ${stockQty} en stock`));
+        const imgThumb = p.imageUrl ? `<img src="${escapeHtml(p.imageUrl)}" alt="${escapeHtml(p.name)}" onerror="this.onerror=null; this.parentElement.innerHTML='🍨';">` : '🍨';
 
         return `
         <tr>
+          <td><div class="img-thumb">${imgThumb}</div></td>
+          <td>
+            <div style="font-weight:700; color:var(--primary); font-size:14px;">${escapeHtml(p.name)}</div>
+            ${p.description ? `<div style="color:var(--text-muted); font-size:12px; margin-top:2px; max-width:280px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.description)}</div>` : ''}
+          </td>
           <td><span class="badge badge-cash">${escapeHtml(p.category)}</span></td>
-          <td><b>${escapeHtml(p.name)}</b></td>
           <td><b style="color:var(--accent); font-size:14px;">${money(p.price)}</b></td>
           <td>
             <span class="stock-badge ${stockClass}">${stockLabel}</span>
-            ${p.trackStock ? `<button class="btn btn-secondary btn-sm" style="margin-left:6px; padding:2px 8px; font-size:11px;" onclick="quickRestock('${p.id}', 10)">+10</button>` : ''}
+            ${p.trackStock ? `<button class="btn btn-secondary btn-sm" style="margin-left:6px; padding:2px 7px; font-size:11px;" onclick="quickRestock('${p.id}', 10)">+10</button>` : ''}
           </td>
           <td>
             <span class="badge ${p.active ? 'badge-rev' : 'badge-exp'}">
               ${p.active ? '✓ Actif' : 'Désactivé'}
             </span>
           </td>
-          <td>
-            <button class="btn btn-secondary btn-sm" onclick="openEditProductModal('${p.id}')">Modifier</button>
-            <button class="btn btn-secondary btn-sm" onclick="toggleProductActive('${p.id}')">
-              ${p.active ? 'Désactiver' : 'Activer'}
-            </button>
+          <td style="text-align:right;">
+            <div style="display:inline-flex; gap:4px;">
+              <button class="btn btn-secondary btn-sm" title="Consulter la fiche" onclick="openViewProductModal('${p.id}')">👁️</button>
+              <button class="btn btn-secondary btn-sm" title="Modifier" onclick="openEditProductModal('${p.id}')">✏️</button>
+              <button class="btn btn-secondary btn-sm" title="${p.active ? 'Désactiver' : 'Activer'}" onclick="toggleProductActive('${p.id}')">
+                ${p.active ? '🚫' : '✓'}
+              </button>
+              <button class="btn btn-danger btn-sm" title="Supprimer" onclick="deleteProduct('${p.id}')">🗑️</button>
+            </div>
           </td>
         </tr>
         `;
@@ -3574,7 +3936,10 @@ ${itemsLines}${discountText}
       el('prodPrice').value = '';
       el('prodStock').value = '30';
       el('prodTrackStock').checked = true;
-      el('prodCategory').innerHTML = data.revenueCats.map(c => `<option>${escapeHtml(c)}</option>`).join('');
+      el('prodImageUrl').value = '';
+      el('prodDesc').value = '';
+      previewImgBox('', 'prodImgPreview');
+      el('prodCategory').innerHTML = data.categories.map(c => `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`).join('');
       openModal('modalProductForm');
     }
 
@@ -3588,8 +3953,51 @@ ${itemsLines}${discountText}
       el('prodPrice').value = p.price;
       el('prodStock').value = p.stock !== undefined ? p.stock : 25;
       el('prodTrackStock').checked = p.trackStock !== false;
-      el('prodCategory').innerHTML = data.revenueCats.map(c => `<option ${c === p.category ? 'selected' : ''}>${escapeHtml(c)}</option>`).join('');
+      el('prodImageUrl').value = p.imageUrl || '';
+      el('prodDesc').value = p.description || '';
+      previewImgBox(p.imageUrl || '', 'prodImgPreview');
+      el('prodCategory').innerHTML = data.categories.map(c => `<option value="${escapeHtml(c.name)}" ${c.name === p.category ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('');
       openModal('modalProductForm');
+    }
+
+    function openViewProductModal(id) {
+      const p = data.products.find(x => x.id === id);
+      if (!p) return;
+
+      const stockQty = p.stock !== undefined ? p.stock : 25;
+      const stockClass = !p.trackStock ? 'stock-ok' : (stockQty <= 0 ? 'stock-empty' : (stockQty <= 5 ? 'stock-low' : 'stock-ok'));
+      const stockLabel = !p.trackStock ? 'Non suivi' : (stockQty <= 0 ? '❌ Épuisé (0)' : (stockQty <= 5 ? `⚠️ Faible (${stockQty})` : `📦 ${stockQty} en stock`));
+      
+      const body = el('viewProductBody');
+      body.innerHTML = `
+        <div class="view-detail-card">
+          ${p.imageUrl ? `<div style="width:100%; height:180px; border-radius:8px; overflow:hidden; margin-bottom:14px; background:#f5eee8;"><img src="${escapeHtml(p.imageUrl)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.display='none'"></div>` : ''}
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+            <div>
+              <span class="badge badge-cash" style="font-size:12px; margin-bottom:6px; display:inline-block;">${escapeHtml(p.category)}</span>
+              <h2 style="font-size:18px; color:var(--primary); font-weight:800; margin:0;">${escapeHtml(p.name)}</h2>
+            </div>
+            <div style="font-size:18px; font-weight:800; color:var(--accent);">${money(p.price)}</div>
+          </div>
+          ${p.description ? `<p style="font-size:13.5px; color:var(--text); background:#fff; padding:10px 12px; border-radius:6px; border:1px solid var(--border); margin:12px 0;">${escapeHtml(p.description)}</p>` : ''}
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; font-size:13px;">
+            <div style="background:white; padding:8px 10px; border-radius:6px; border:1px solid var(--border);">
+              <span style="color:var(--text-muted); display:block; font-size:11px;">Stock</span>
+              <span class="stock-badge ${stockClass}">${stockLabel}</span>
+            </div>
+            <div style="background:white; padding:8px 10px; border-radius:6px; border:1px solid var(--border);">
+              <span style="color:var(--text-muted); display:block; font-size:11px;">Statut</span>
+              <span class="badge ${p.active ? 'badge-rev' : 'badge-exp'}">${p.active ? '✓ Actif' : 'Désactivé'}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      el('viewProductEditBtn').onclick = () => {
+        closeModal('modalViewProduct');
+        openEditProductModal(p.id);
+      };
+      openModal('modalViewProduct');
     }
 
     function saveProductForm() {
@@ -3599,9 +4007,11 @@ ${itemsLines}${discountText}
       const price = Number(val('prodPrice'));
       const stock = Math.max(0, Number(val('prodStock')) || 0);
       const trackStock = el('prodTrackStock').checked;
+      const imageUrl = val('prodImageUrl').trim();
+      const description = val('prodDesc').trim();
 
       if (!name || price <= 0) {
-        alert('Veuillez saisir un nom et un prix valide.');
+        alert('Veuillez saisir un nom et un prix valide (> 0 F CFA).');
         return;
       }
 
@@ -3613,6 +4023,8 @@ ${itemsLines}${discountText}
           prod.price = price;
           prod.stock = stock;
           prod.trackStock = trackStock;
+          prod.imageUrl = imageUrl;
+          prod.description = description;
           showToast(`Produit "${name}" mis à jour !`, 'success');
         }
       } else {
@@ -3623,13 +4035,27 @@ ${itemsLines}${discountText}
           price,
           stock,
           trackStock,
+          imageUrl,
+          description,
           active: true
         });
-        showToast(`Produit "${name}" ajouté !`, 'success');
+        showToast(`Produit "${name}" ajouté avec succès !`, 'success');
       }
 
       persist();
       closeModal('modalProductForm');
+      renderProductsTable();
+    }
+
+    function deleteProduct(id) {
+      const prod = data.products.find(x => x.id === id);
+      if (!prod) return;
+      if (!confirm(`Êtes-vous sûr de vouloir supprimer définitivement le produit "${prod.name}" ?`)) return;
+
+      data.products = data.products.filter(x => x.id !== id);
+      persist();
+      showToast(`Produit "${prod.name}" supprimé !`, 'info');
+      renderProductsTable();
     }
 
     function toggleProductActive(id) {
@@ -3637,6 +4063,187 @@ ${itemsLines}${discountText}
       if (!prod) return;
       prod.active = !prod.active;
       persist();
+      renderProductsTable();
+    }
+
+    // --- CATÉGORIES ---
+    function renderCategoriesView() {
+      const tbody = el('categoriesTableRows');
+      if (!tbody) return;
+
+      if (el('countCategoriesBadge')) {
+        el('countCategoriesBadge').textContent = data.categories.length;
+      }
+
+      const q = (val('catalogCategorySearch') || '').toLowerCase().trim();
+      const filtered = data.categories.filter(c => {
+        return !q || c.name.toLowerCase().includes(q) || (c.description && c.description.toLowerCase().includes(q));
+      });
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:30px; color:var(--text-muted);">Aucune catégorie ne correspond à cette recherche.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(c => {
+        const count = data.products.filter(p => p.category === c.name).length;
+        const imgThumb = c.imageUrl ? `<img src="${escapeHtml(c.imageUrl)}" alt="${escapeHtml(c.name)}" onerror="this.onerror=null; this.parentElement.innerHTML='🏷️';">` : '🏷️';
+
+        return `
+        <tr>
+          <td><div class="img-thumb">${imgThumb}</div></td>
+          <td><b style="color:var(--primary); font-size:14px;">${escapeHtml(c.name)}</b></td>
+          <td style="color:var(--text-muted); font-size:13px; max-width:280px;">${escapeHtml(c.description || '—')}</td>
+          <td><span class="badge badge-cash" style="font-weight:700;">${count} produit${count > 1 ? 's' : ''}</span></td>
+          <td style="text-align:right;">
+            <div style="display:inline-flex; gap:4px;">
+              <button class="btn btn-secondary btn-sm" title="Consulter la catégorie" onclick="openViewCategoryModal('${c.id}')">👁️</button>
+              <button class="btn btn-secondary btn-sm" title="Modifier" onclick="openEditCategoryModal('${c.id}')">✏️</button>
+              <button class="btn btn-danger btn-sm" title="Supprimer" onclick="deleteCategory('${c.id}')">🗑️</button>
+            </div>
+          </td>
+        </tr>
+        `;
+      }).join('');
+    }
+
+    function openNewCategoryModal() {
+      el('categoryModalTitle').textContent = 'Nouvelle Catégorie';
+      el('catEditId').value = '';
+      el('catName').value = '';
+      el('catDescription').value = '';
+      el('catImageUrl').value = '';
+      previewImgBox('', 'catImgPreview');
+      openModal('modalCategoryForm');
+    }
+
+    function openEditCategoryModal(id) {
+      const c = data.categories.find(x => x.id === id);
+      if (!c) return;
+
+      el('categoryModalTitle').textContent = 'Modifier la Catégorie';
+      el('catEditId').value = c.id;
+      el('catName').value = c.name;
+      el('catDescription').value = c.description || '';
+      el('catImageUrl').value = c.imageUrl || '';
+      previewImgBox(c.imageUrl || '', 'catImgPreview');
+      openModal('modalCategoryForm');
+    }
+
+    function openViewCategoryModal(id) {
+      const c = data.categories.find(x => x.id === id);
+      if (!c) return;
+
+      const prods = data.products.filter(p => p.category === c.name);
+      const body = el('viewCategoryBody');
+      body.innerHTML = `
+        <div class="view-detail-card">
+          ${c.imageUrl ? `<div style="width:100%; height:160px; border-radius:8px; overflow:hidden; margin-bottom:14px; background:#f5eee8;"><img src="${escapeHtml(c.imageUrl)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.display='none'"></div>` : ''}
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h2 style="font-size:18px; color:var(--primary); font-weight:800; margin:0;">🏷️ ${escapeHtml(c.name)}</h2>
+            <span class="badge badge-cash" style="font-size:13px; font-weight:700;">${prods.length} produit${prods.length > 1 ? 's' : ''}</span>
+          </div>
+          ${c.description ? `<p style="font-size:13.5px; color:var(--text); background:white; padding:10px 12px; border-radius:6px; border:1px solid var(--border); margin:10px 0 16px 0;">${escapeHtml(c.description)}</p>` : ''}
+          <h4 style="font-size:13px; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Produits dans cette catégorie :</h4>
+          ${prods.length ? `
+            <div style="max-height:220px; overflow-y:auto; border:1px solid var(--border); border-radius:6px; background:white;">
+              ${prods.map(p => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-bottom:1px solid var(--border);">
+                  <div style="font-weight:600; font-size:13px;">${escapeHtml(p.name)}</div>
+                  <div style="font-weight:700; color:var(--accent); font-size:13px;">${money(p.price)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : '<div style="color:var(--text-muted); font-size:13px; font-style:italic;">Aucun produit rattaché à cette catégorie.</div>'}
+        </div>
+      `;
+
+      el('viewCategoryEditBtn').onclick = () => {
+        closeModal('modalViewCategory');
+        openEditCategoryModal(c.id);
+      };
+      openModal('modalViewCategory');
+    }
+
+    function saveCategoryForm() {
+      const id = val('catEditId');
+      const name = val('catName').trim();
+      const description = val('catDescription').trim();
+      const imageUrl = val('catImageUrl').trim();
+
+      if (!name) {
+        alert('Veuillez saisir un nom pour la catégorie.');
+        return;
+      }
+
+      if (id) {
+        const cat = data.categories.find(x => x.id === id);
+        if (cat) {
+          const oldName = cat.name;
+          cat.name = name;
+          cat.description = description;
+          cat.imageUrl = imageUrl;
+
+          // If category was renamed, update all products belonging to the old name!
+          if (oldName !== name) {
+            data.products.forEach(p => {
+              if (p.category === oldName) p.category = name;
+            });
+          }
+          showToast(`Catégorie "${name}" mise à jour !`, 'success');
+        }
+      } else {
+        // Prevent duplicate category names
+        if (data.categories.some(c => c.name.toLowerCase() === name.toLowerCase())) {
+          alert(`Une catégorie nommée "${name}" existe déjà.`);
+          return;
+        }
+
+        data.categories.push({
+          id: 'cat_' + Date.now(),
+          name,
+          description,
+          imageUrl
+        });
+        showToast(`Catégorie "${name}" créée avec succès !`, 'success');
+      }
+
+      // Synchronize revenueCats array
+      data.revenueCats = data.categories.map(c => c.name);
+
+      persist();
+      closeModal('modalCategoryForm');
+      renderCategoriesView();
+      renderProductsTable();
+    }
+
+    function deleteCategory(id) {
+      const cat = data.categories.find(x => x.id === id);
+      if (!cat) return;
+
+      const prodsCount = data.products.filter(p => p.category === cat.name).length;
+      let msg = `Êtes-vous sûr de vouloir supprimer la catégorie "${cat.name}" ?`;
+      if (prodsCount > 0) {
+        msg += `\n\n⚠️ Attention : ${prodsCount} produit(s) appartiennent à cette catégorie. Ils seront réassignés vers la catégorie "Autres".`;
+      }
+      if (!confirm(msg)) return;
+
+      if (prodsCount > 0) {
+        if (!data.categories.some(c => c.name === 'Autres')) {
+          data.categories.push({ id: 'cat_autres', name: 'Autres', description: 'Articles divers', imageUrl: '' });
+        }
+        data.products.forEach(p => {
+          if (p.category === cat.name) p.category = 'Autres';
+        });
+      }
+
+      data.categories = data.categories.filter(x => x.id !== id);
+      data.revenueCats = data.categories.map(c => c.name);
+
+      persist();
+      showToast(`Catégorie "${cat.name}" supprimée !`, 'info');
+      renderCategoriesView();
+      renderProductsTable();
     }
 
     /* =========================================================================
@@ -4210,8 +4817,9 @@ ${itemsLines}${discountText}
       // Render Credits
       renderCredits();
 
-      // Render Products
+      // Render Products & Categories
       renderProductsTable();
+      renderCategoriesView();
       renderPosCategoryPills();
       renderPosCatalog();
 
@@ -4449,7 +5057,7 @@ ${itemsLines}${discountText}
       if (pageId === 'history') renderHistory();
       if (pageId === 'reports') renderReport();
       if (pageId === 'credits') renderCredits();
-      if (pageId === 'products') renderProductsTable();
+      if (pageId === 'products') switchCatalogTab(currentCatalogTab);
       if (pageId === 'cash') calculateClosingPreview();
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
