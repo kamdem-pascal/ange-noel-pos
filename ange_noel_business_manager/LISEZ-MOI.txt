@@ -1,0 +1,22 @@
+ANGE NOËL BUSINESS MANAGER — VERSION DE DÉMARRAGE
+
+Contenu :
+- index.html : application de gestion locale
+- manifest.webmanifest : paramètres d'installation PWA
+- sw.js : cache hors connexion après le premier chargement sur un hébergement HTTPS
+
+Démarrage rapide :
+1. Décompressez le dossier.
+2. Pour un essai simple, ouvrez index.html dans un navigateur récent.
+3. Pour installer l'application comme une PWA et bénéficier du cache hors connexion, hébergez le dossier sur un site HTTPS puis ouvrez-le dans Chrome. Choisissez « Installer l'application » ou « Ajouter à l'écran d'accueil ».
+
+Fonctions disponibles : recettes globales ou détaillées, dépenses catégorisées, caisse, historique avec modification et archivage, rapports, export CSV compatible Excel, impression en PDF, sauvegarde/restauration JSON, profils opérateurs locaux.
+
+LIMITES IMPORTANTES DE CETTE VERSION :
+- Les données restent dans le navigateur et sur l'appareil utilisé. Elles ne se synchronisent PAS entre plusieurs téléphones ou ordinateurs.
+- Les profils opérateurs servent à identifier les opérations, mais ne constituent PAS une authentification sécurisée par mot de passe.
+- L'export CSV s'ouvre dans Excel. Pour obtenir un PDF, utilisez le bouton Imprimer / PDF et choisissez « Enregistrer au format PDF ».
+- Le mode hors connexion PWA fonctionne après un premier chargement réussi depuis un hébergement HTTPS.
+- Pour activer les comptes sécurisés, la synchronisation entre appareils, la sauvegarde serveur et la résolution des conflits, il faut déployer un backend avec base de données et hébergement. Ne saisissez pas de données confidentielles dans cette version locale de démonstration.
+
+Conseil : utilisez « Sauvegarder les données » régulièrement et conservez le fichier JSON dans un endroit sûr.

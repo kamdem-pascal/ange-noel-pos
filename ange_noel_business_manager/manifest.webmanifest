@@ -1,0 +1,32 @@
+{
+  "name": "Ange Noël Business Manager",
+  "short_name": "Ange Noël",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fff8f1",
+  "theme_color": "#641b20",
+  "lang": "fr",
+  "description": "Gestion des ventes, caisse, Mobile Money et dépenses — Les Gourmandises de Ange Noël (Douala)",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#781d24"/>
+      <stop offset="50%" stop-color="#5b141a"/>
+      <stop offset="100%" stop-color="#380b0f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9d976"/>
+      <stop offset="100%" stop-color="#e99b24"/>
+    </linearGradient>
+    <linearGradient id="cone" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d4883b"/>
+      <stop offset="50%" stop-color="#f3b263"/>
+      <stop offset="100%" stop-color="#bf7022"/>
+    </linearGradient>
+    <linearGradient id="scoop1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff7597"/>
+      <stop offset="100%" stop-color="#d8265b"/>
+    </linearGradient>
+    <linearGradient id="scoop2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff2d6"/>
+      <stop offset="100%" stop-color="#ffd08a"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background circle with border -->
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="230" fill="none" stroke="url(#gold)" stroke-width="4" opacity="0.5" stroke-dasharray="10 6"/>
+  <circle cx="256" cy="256" r="216" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.2"/>
+
+  <g filter="url(#glow)">
+    <!-- Cone -->
+    <path d="M206 280 L306 280 L256 425 Z" fill="url(#cone)" stroke="#9e5513" stroke-width="3" stroke-linejoin="round"/>
+    <!-- Cone waffle pattern -->
+    <line x1="220" y1="300" x2="285" y2="390" stroke="#a05615" stroke-width="2.5" opacity="0.6"/>
+    <line x1="240" y1="290" x2="270" y2="350" stroke="#a05615" stroke-width="2.5" opacity="0.6"/>
+    <line x1="292" y1="300" x2="227" y2="390" stroke="#a05615" stroke-width="2.5" opacity="0.6"/>
+    <line x1="272" y1="290" x2="242" y2="350" stroke="#a05615" stroke-width="2.5" opacity="0.6"/>
+
+    <!-- Scoop 2 (Vanilla cream behind) -->
+    <circle cx="285" cy="225" r="58" fill="url(#scoop2)"/>
+
+    <!-- Scoop 1 (Berry / Strawberry in front) -->
+    <circle cx="230" cy="230" r="62" fill="url(#scoop1)"/>
+
+    <!-- Scoop 3 (Cherry on top) -->
+    <circle cx="256" cy="155" r="32" fill="#bd1338"/>
+    <path d="M260 130 Q280 95 315 90" fill="none" stroke="#528522" stroke-width="4.5" stroke-linecap="round"/>
+    <ellipse cx="320" cy="88" rx="12" ry="6" fill="#6da829" transform="rotate(-15 320 88)"/>
+
+    <!-- Glaze drippings -->
+    <path d="M175 240 Q190 270 205 250 Q225 285 245 255 Q265 280 285 250 Q305 275 325 245 Q340 220 330 200" fill="none" stroke="#871032" stroke-width="5" opacity="0.4"/>
+
+    <!-- Topping sprinkles -->
+    <rect x="215" y="190" width="14" height="5" rx="2.5" fill="#f9d976" transform="rotate(25 215 190)"/>
+    <rect x="245" y="195" width="14" height="5" rx="2.5" fill="#ffffff" transform="rotate(-35 245 195)"/>
+    <rect x="275" y="180" width="14" height="5" rx="2.5" fill="#8ee000" transform="rotate(15 275 180)"/>
+    <rect x="220" y="225" width="12" height="4" rx="2" fill="#ffd08a" transform="rotate(-15 220 225)"/>
+  </g>
+
+  <!-- Banner text / Brand initials -->
+  <text x="256" y="468" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="url(#gold)" text-anchor="middle" letter-spacing="3">ANGE NOËL</text>
+  <text x="256" y="490" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle" opacity="0.8" letter-spacing="2">GOURMANDISES</text>
+</svg>
