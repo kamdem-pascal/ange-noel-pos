@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -7,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Les Gourmandises de Ange Noël — Business Manager</title>
-  
+
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="apple-touch-icon" href="icon-192.png">
@@ -48,8 +49,12 @@
       --font: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background-color: var(--bg);
       color: var(--text);
@@ -87,6 +92,7 @@
       padding-bottom: 20px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
+
     .brand-icon {
       width: 58px;
       height: 58px;
@@ -96,9 +102,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
     }
-    .brand-icon img, .brand-icon svg { width: 44px; height: 44px; }
+
+    .brand-icon img,
+    .brand-icon svg {
+      width: 44px;
+      height: 44px;
+    }
+
     .brand-title {
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 19px;
@@ -107,6 +119,7 @@
       color: #fff;
       line-height: 1.25;
     }
+
     .brand-subtitle {
       display: inline-block;
       margin-top: 4px;
@@ -125,6 +138,7 @@
       margin-top: 20px;
       flex: 1;
     }
+
     .nav-item {
       display: flex;
       align-items: center;
@@ -141,18 +155,30 @@
       text-align: left;
       transition: all 0.18s ease;
     }
-    .nav-item svg { width: 19px; height: 19px; opacity: 0.85; flex-shrink: 0; }
+
+    .nav-item svg {
+      width: 19px;
+      height: 19px;
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+
     .nav-item:hover {
       background: rgba(255, 255, 255, 0.12);
       color: #fff;
     }
+
     .nav-item.active {
       background: var(--accent);
       color: #ffffff;
       font-weight: 650;
       box-shadow: 0 4px 12px rgba(216, 38, 91, 0.35);
     }
-    .nav-item.active svg { opacity: 1; }
+
+    .nav-item.active svg {
+      opacity: 1;
+    }
+
     .nav-badge {
       margin-left: auto;
       background: rgba(255, 255, 255, 0.25);
@@ -169,7 +195,10 @@
       color: #f3cebd;
       line-height: 1.4;
     }
-    .sidebar-footer b { color: #fff; }
+
+    .sidebar-footer b {
+      color: #fff;
+    }
 
     /* Main Content */
     .main-content {
@@ -190,12 +219,14 @@
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
     }
+
     .page-info h1 {
       font-family: Georgia, serif;
       font-size: 26px;
       color: var(--primary);
       margin-bottom: 3px;
     }
+
     .page-info p {
       color: var(--text-muted);
       font-size: 13.5px;
@@ -206,6 +237,7 @@
       align-items: center;
       gap: 12px;
     }
+
     .operator-select-wrap {
       display: flex;
       align-items: center;
@@ -216,11 +248,13 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
     }
+
     .operator-select-wrap label {
       font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
     }
+
     .operator-select-wrap select {
       border: 0;
       background: transparent;
@@ -230,6 +264,7 @@
       outline: none;
       cursor: pointer;
     }
+
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -241,6 +276,7 @@
       background: var(--success-soft);
       color: var(--success);
     }
+
     .status-badge::before {
       content: '';
       width: 7px;
@@ -248,6 +284,7 @@
       background: currentColor;
       border-radius: 50%;
     }
+
     .btn-pwa-install {
       display: none;
       align-items: center;
@@ -271,15 +308,18 @@
       box-shadow: var(--shadow-sm);
       transition: box-shadow 0.2s ease;
     }
+
     .card:hover {
       box-shadow: var(--shadow-md);
     }
+
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 18px;
     }
+
     .card-title {
       font-size: 17px;
       font-weight: 700;
@@ -296,6 +336,7 @@
       gap: 16px;
       margin-bottom: 24px;
     }
+
     .kpi-card {
       color: white;
       border-radius: var(--radius-md);
@@ -308,6 +349,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .kpi-card::after {
       content: '';
       position: absolute;
@@ -319,11 +361,26 @@
       background: rgba(255, 255, 255, 0.1);
       pointer-events: none;
     }
-    .kpi-card.rev { background: linear-gradient(135deg, #e83c78 0%, #a5184b 100%); }
-    .kpi-card.exp { background: linear-gradient(135deg, #a84b25 0%, #68270f 100%); }
-    .kpi-card.profit { background: linear-gradient(135deg, #16a34a 0%, #0d5c28 100%); }
-    .kpi-card.cash { background: linear-gradient(135deg, #8b5cf6 0%, #5b21b6 100%); }
-    .kpi-card.momo { background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%); }
+
+    .kpi-card.rev {
+      background: linear-gradient(135deg, #e83c78 0%, #a5184b 100%);
+    }
+
+    .kpi-card.exp {
+      background: linear-gradient(135deg, #a84b25 0%, #68270f 100%);
+    }
+
+    .kpi-card.profit {
+      background: linear-gradient(135deg, #16a34a 0%, #0d5c28 100%);
+    }
+
+    .kpi-card.cash {
+      background: linear-gradient(135deg, #8b5cf6 0%, #5b21b6 100%);
+    }
+
+    .kpi-card.momo {
+      background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+    }
 
     .kpi-label {
       font-size: 13px;
@@ -332,12 +389,14 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
     .kpi-value {
       font-size: 26px;
       font-weight: 800;
       letter-spacing: -0.5px;
       margin: 8px 0 4px;
     }
+
     .kpi-desc {
       font-size: 11.5px;
       opacity: 0.85;
@@ -359,50 +418,66 @@
       text-decoration: none;
       font-family: inherit;
     }
-    .btn svg { width: 18px; height: 18px; }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .btn-primary {
       background: var(--primary);
       color: white;
     }
+
     .btn-primary:hover {
       background: var(--primary-light);
       box-shadow: 0 4px 12px rgba(91, 20, 26, 0.25);
     }
+
     .btn-accent {
       background: var(--accent);
       color: white;
     }
+
     .btn-accent:hover {
       background: var(--accent-hover);
       box-shadow: 0 4px 12px rgba(216, 38, 91, 0.35);
     }
+
     .btn-secondary {
       background: #f7ede7;
       color: var(--primary);
       border: 1px solid var(--border);
     }
+
     .btn-secondary:hover {
       background: #f1dfd6;
     }
+
     .btn-success {
       background: var(--success);
       color: white;
     }
+
     .btn-success:hover {
       background: #15803d;
     }
+
     .btn-danger {
       background: var(--danger);
       color: white;
     }
+
     .btn-danger:hover {
       background: #b91c1c;
     }
+
     .btn-sm {
       padding: 6px 11px;
       font-size: 12.5px;
       border-radius: var(--radius-sm);
     }
+
     .btn-icon {
       padding: 8px;
       border-radius: var(--radius-sm);
@@ -415,6 +490,7 @@
       gap: 12px;
       margin-bottom: 24px;
     }
+
     .quick-btn {
       display: flex;
       align-items: center;
@@ -431,11 +507,13 @@
       transition: all 0.18s ease;
       text-align: left;
     }
+
     .quick-btn:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
     }
+
     .quick-btn-icon {
       width: 40px;
       height: 40px;
@@ -452,12 +530,21 @@
       display: none;
       animation: fadeIn 0.2s ease-in-out;
     }
+
     .view-section.active {
       display: block;
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Grids */
@@ -467,6 +554,7 @@
       gap: 20px;
       margin-top: 20px;
     }
+
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -479,26 +567,32 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
+
     .form-grid.cols-3 {
       grid-template-columns: repeat(3, 1fr);
     }
+
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
+
     .form-group.col-full {
       grid-column: 1 / -1;
     }
+
     .form-label {
       font-size: 13px;
       font-weight: 650;
       color: var(--text);
     }
+
     .form-label small {
       font-weight: 400;
       color: var(--text-muted);
     }
+
     .form-control {
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
@@ -510,11 +604,13 @@
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
       width: 100%;
     }
+
     .form-control:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(216, 38, 91, 0.15);
     }
+
     textarea.form-control {
       resize: vertical;
       min-height: 75px;
@@ -526,16 +622,19 @@
       gap: 8px;
       flex-wrap: wrap;
     }
+
     .payment-chip {
       flex: 1;
       min-width: 90px;
       position: relative;
     }
+
     .payment-chip input {
       position: absolute;
       opacity: 0;
       pointer-events: none;
     }
+
     .payment-chip label {
       display: flex;
       align-items: center;
@@ -552,7 +651,8 @@
       transition: all 0.15s ease;
       text-align: center;
     }
-    .payment-chip input:checked + label {
+
+    .payment-chip input:checked+label {
       border-color: var(--accent);
       background: var(--accent-soft);
       color: var(--accent);
@@ -565,12 +665,14 @@
       grid-template-columns: 1.4fr 1fr;
       gap: 20px;
     }
+
     .pos-catalog-header {
       display: flex;
       gap: 10px;
       margin-bottom: 14px;
       flex-wrap: wrap;
     }
+
     .cat-pill-filter {
       display: flex;
       gap: 6px;
@@ -578,6 +680,7 @@
       padding-bottom: 6px;
       width: 100%;
     }
+
     .cat-btn {
       padding: 7px 14px;
       border: 1px solid var(--border);
@@ -590,11 +693,14 @@
       white-space: nowrap;
       transition: all 0.15s;
     }
-    .cat-btn.active, .cat-btn:hover {
+
+    .cat-btn.active,
+    .cat-btn:hover {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
     }
+
     .pos-products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -603,6 +709,7 @@
       overflow-y: auto;
       padding-right: 4px;
     }
+
     .product-card {
       background: white;
       border: 1px solid var(--border);
@@ -615,11 +722,13 @@
       justify-content: space-between;
       min-height: 110px;
     }
+
     .product-card:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
     }
+
     .product-card-cat {
       font-size: 11px;
       color: var(--text-muted);
@@ -627,6 +736,7 @@
       font-weight: 600;
       margin-bottom: 4px;
     }
+
     .product-card-title {
       font-size: 14px;
       font-weight: 700;
@@ -634,6 +744,7 @@
       line-height: 1.3;
       margin-bottom: 8px;
     }
+
     .product-card-price {
       font-size: 15px;
       font-weight: 800;
@@ -652,6 +763,7 @@
       height: 100%;
       box-shadow: var(--shadow-sm);
     }
+
     .cart-items-list {
       flex: 1;
       overflow-y: auto;
@@ -662,6 +774,7 @@
       gap: 8px;
       padding-right: 4px;
     }
+
     .cart-item {
       display: flex;
       align-items: center;
@@ -672,23 +785,28 @@
       border: 1px solid var(--border-light);
       border-radius: var(--radius-sm);
     }
+
     .cart-item-info {
       flex: 1;
     }
+
     .cart-item-name {
       font-size: 13.5px;
       font-weight: 700;
       color: var(--text);
     }
+
     .cart-item-sub {
       font-size: 12px;
       color: var(--text-muted);
     }
+
     .cart-item-qty {
       display: flex;
       align-items: center;
       gap: 6px;
     }
+
     .qty-btn {
       width: 26px;
       height: 26px;
@@ -702,7 +820,11 @@
       font-weight: bold;
       color: var(--primary);
     }
-    .qty-btn:hover { background: var(--border-light); }
+
+    .qty-btn:hover {
+      background: var(--border-light);
+    }
+
     .cart-item-total {
       font-size: 14px;
       font-weight: 800;
@@ -710,11 +832,13 @@
       min-width: 75px;
       text-align: right;
     }
+
     .cart-total-box {
       border-top: 2px dashed var(--border);
       padding-top: 14px;
       margin-top: auto;
     }
+
     .total-row {
       display: flex;
       justify-content: space-between;
@@ -723,6 +847,7 @@
       margin-bottom: 6px;
       color: var(--text-muted);
     }
+
     .total-row.grand-total {
       font-size: 22px;
       font-weight: 850;
@@ -735,12 +860,14 @@
       overflow-x: auto;
       border-radius: var(--radius-sm);
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 13.5px;
       min-width: 600px;
     }
+
     th {
       background: #faf2ec;
       color: var(--primary);
@@ -752,14 +879,17 @@
       text-align: left;
       border-bottom: 2px solid var(--border);
     }
+
     td {
       padding: 12px 14px;
       border-bottom: 1px solid var(--border-light);
       vertical-align: middle;
     }
+
     tr:hover td {
       background: #fffaf7;
     }
+
     .badge {
       display: inline-flex;
       align-items: center;
@@ -769,11 +899,31 @@
       font-size: 11.5px;
       font-weight: 700;
     }
-    .badge-rev { background: var(--success-soft); color: var(--success); }
-    .badge-exp { background: var(--danger-soft); color: var(--danger); }
-    .badge-credit { background: var(--warning-soft); color: var(--warning); }
-    .badge-momo { background: var(--gold-soft); color: var(--gold); }
-    .badge-cash { background: var(--purple-soft); color: var(--purple); }
+
+    .badge-rev {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .badge-exp {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .badge-credit {
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    .badge-momo {
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    .badge-cash {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
 
     /* Modals */
     .modal-overlay {
@@ -787,9 +937,11 @@
       padding: 16px;
       z-index: 100;
     }
+
     .modal-overlay.open {
       display: flex;
     }
+
     .modal-box {
       background: white;
       border-radius: var(--radius-lg);
@@ -801,10 +953,19 @@
       box-shadow: var(--shadow-lg);
       animation: modalPop 0.2s ease-out;
     }
+
     @keyframes modalPop {
-      from { transform: scale(0.96); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.96);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
+
     .modal-head {
       display: flex;
       justify-content: space-between;
@@ -812,11 +973,13 @@
       padding: 18px 22px;
       border-bottom: 1px solid var(--border);
     }
+
     .modal-head h3 {
       font-family: Georgia, serif;
       font-size: 20px;
       color: var(--primary);
     }
+
     .modal-close {
       border: 0;
       background: #f7ede7;
@@ -830,10 +993,12 @@
       justify-content: center;
       font-size: 18px;
     }
+
     .modal-body {
       padding: 22px;
       overflow-y: auto;
     }
+
     .modal-footer {
       padding: 16px 22px;
       border-top: 1px solid var(--border);
@@ -855,11 +1020,32 @@
       font-size: 13px;
       line-height: 1.35;
     }
-    .receipt-preview .r-center { text-align: center; }
-    .receipt-preview .r-title { font-size: 15px; font-weight: bold; margin-bottom: 2px; }
-    .receipt-preview .r-divider { border-bottom: 1px dashed #777; margin: 10px 0; }
-    .receipt-preview .r-table { width: 100%; min-width: auto; font-size: 12.5px; }
-    .receipt-preview .r-table td { padding: 4px 0; border: 0; }
+
+    .receipt-preview .r-center {
+      text-align: center;
+    }
+
+    .receipt-preview .r-title {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .receipt-preview .r-divider {
+      border-bottom: 1px dashed #777;
+      margin: 10px 0;
+    }
+
+    .receipt-preview .r-table {
+      width: 100%;
+      min-width: auto;
+      font-size: 12.5px;
+    }
+
+    .receipt-preview .r-table td {
+      padding: 4px 0;
+      border: 0;
+    }
 
     /* Toasts */
     .toast-container {
@@ -872,6 +1058,7 @@
       z-index: 999;
       pointer-events: none;
     }
+
     .toast {
       background: white;
       color: var(--text);
@@ -887,12 +1074,29 @@
       gap: 10px;
       animation: slideInRight 0.25s ease-out;
     }
-    .toast.success { border-color: var(--success); }
-    .toast.error { border-color: var(--danger); }
-    .toast.info { border-color: var(--blue); }
+
+    .toast.success {
+      border-color: var(--success);
+    }
+
+    .toast.error {
+      border-color: var(--danger);
+    }
+
+    .toast.info {
+      border-color: var(--blue);
+    }
+
     @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
 
     /* Stock badges */
@@ -904,9 +1108,22 @@
       padding: 2px 7px;
       border-radius: 6px;
     }
-    .stock-ok { background: #e0f2fe; color: #0369a1; }
-    .stock-low { background: #ffedd5; color: #c2410c; }
-    .stock-empty { background: #fee2e2; color: #b91c1c; }
+
+    .stock-ok {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .stock-low {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .stock-empty {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
     .product-card.disabled-card {
       opacity: 0.6;
       border: 1px dashed #f87171;
@@ -924,6 +1141,7 @@
       width: 100%;
       margin-bottom: 14px;
     }
+
     .pin-keypad {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -931,6 +1149,7 @@
       max-width: 250px;
       margin: 0 auto;
     }
+
     .pin-key {
       padding: 12px;
       font-size: 18px;
@@ -941,58 +1160,142 @@
       cursor: pointer;
       transition: all 0.15s;
     }
+
     .pin-key:hover {
       background: #fdf2f4;
       border-color: var(--primary);
     }
+
     .pin-key:active {
       transform: scale(0.95);
     }
 
     /* Print Styles */
     @media print {
-      body { background: white; color: black; font-size: 12pt; }
-      .sidebar, .top-bar, .quick-actions, .cat-pill-filter, .btn, .nav-item, .toast-container, .modal-close { display: none !important; }
-      .app-layout { display: block; }
-      .main-content { padding: 0; max-width: 100%; }
-      .card { border: 0; box-shadow: none; padding: 0; }
-      .receipt-preview { border: 0; width: 100%; max-width: 100%; font-size: 10pt; }
+      body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+      }
+
+      .sidebar,
+      .top-bar,
+      .quick-actions,
+      .cat-pill-filter,
+      .btn,
+      .nav-item,
+      .toast-container,
+      .modal-close {
+        display: none !important;
+      }
+
+      .app-layout {
+        display: block;
+      }
+
+      .main-content {
+        padding: 0;
+        max-width: 100%;
+      }
+
+      .card {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .receipt-preview {
+        border: 0;
+        width: 100%;
+        max-width: 100%;
+        font-size: 10pt;
+      }
     }
 
     /* Responsive */
     @media (max-width: 992px) {
-      .app-layout { grid-template-columns: 1fr; }
+      .app-layout {
+        grid-template-columns: 1fr;
+      }
+
       .sidebar {
         height: auto;
         position: relative;
         padding: 14px;
       }
-      .brand-header { padding-bottom: 10px; }
-      .brand-icon { display: none; }
+
+      .brand-header {
+        padding-bottom: 10px;
+      }
+
+      .brand-icon {
+        display: none;
+      }
+
       .nav-list {
         flex-direction: row;
         overflow-x: auto;
         padding-bottom: 6px;
         margin-top: 10px;
       }
-      .nav-item { white-space: nowrap; padding: 9px 12px; font-size: 13px; }
-      .sidebar-footer { display: none; }
-      .main-content { padding: 16px; }
-      .pos-container { grid-template-columns: 1fr; }
-      .grid-2 { grid-template-columns: 1fr; }
+
+      .nav-item {
+        white-space: nowrap;
+        padding: 9px 12px;
+        font-size: 13px;
+      }
+
+      .sidebar-footer {
+        display: none;
+      }
+
+      .main-content {
+        padding: 16px;
+      }
+
+      .pos-container {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 600px) {
-      .top-bar { flex-direction: column; align-items: flex-start; }
-      .top-actions { width: 100%; justify-content: space-between; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-grid.cols-3 { grid-template-columns: 1fr; }
-      .kpi-grid { grid-template-columns: 1fr 1fr; }
-      .kpi-value { font-size: 20px; }
-      .quick-actions { grid-template-columns: 1fr; }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .top-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid.cols-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .kpi-value {
+        font-size: 20px;
+      }
+
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div class="app-layout">
@@ -1009,48 +1312,74 @@
 
         <nav class="nav-list" id="mainNav">
           <button class="nav-item active" data-page="dashboard">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
             <span>Tableau de Bord</span>
           </button>
-          
+
           <button class="nav-item" data-page="pos">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
             <span>Caisse Express & Ventes</span>
           </button>
 
           <button class="nav-item" data-page="expenses">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             <span>Dépenses</span>
           </button>
 
           <button class="nav-item" data-page="cash">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
             <span>Caisse & Clôture</span>
           </button>
 
           <button class="nav-item" data-page="credits">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             <span>Crédits Clients</span>
             <span class="nav-badge" id="badgeCredits">0</span>
           </button>
 
           <button class="nav-item" data-page="history">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
             <span>Historique</span>
           </button>
 
           <button class="nav-item" data-page="reports">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
             <span>Rapports & Stats</span>
           </button>
 
           <button class="nav-item" data-page="products">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
             <span>Catalogue Produits</span>
           </button>
 
           <button class="nav-item" data-page="settings">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
             <span>Paramètres</span>
           </button>
         </nav>
@@ -1148,7 +1477,8 @@
         </div>
 
         <!-- Low Stock Warning Banner -->
-        <div id="lowStockAlertBanner" style="display:none; background:var(--warning-soft); border:1px solid #fdba74; padding:12px 16px; border-radius:var(--radius-md); margin-bottom:20px; color:#9a3412;">
+        <div id="lowStockAlertBanner"
+          style="display:none; background:var(--warning-soft); border:1px solid #fdba74; padding:12px 16px; border-radius:var(--radius-md); margin-bottom:20px; color:#9a3412;">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
             <div style="display:flex; align-items:center; gap:8px; font-weight:600;">
               <span style="font-size:18px;">⚠️</span>
@@ -1209,7 +1539,8 @@
           <!-- Catalog Left Pane -->
           <div>
             <div class="pos-catalog-header">
-              <input type="text" id="posSearch" class="form-control" placeholder="🔍 Rechercher une gourmandise..." oninput="renderPosCatalog()" style="flex:1;">
+              <input type="text" id="posSearch" class="form-control" placeholder="🔍 Rechercher une gourmandise..."
+                oninput="renderPosCatalog()" style="flex:1;">
               <button class="btn btn-secondary btn-sm" onclick="openCustomItemModal()">＋ Article sur-mesure</button>
             </div>
 
@@ -1230,10 +1561,12 @@
             <!-- Customer / Info -->
             <div class="form-grid" style="margin-bottom: 10px;">
               <div class="form-group">
-                <input type="text" id="cartCustomer" class="form-control" placeholder="Client (facultatif)" style="font-size:12.5px; padding:6px 10px;">
+                <input type="text" id="cartCustomer" class="form-control" placeholder="Client (facultatif)"
+                  style="font-size:12.5px; padding:6px 10px;">
               </div>
               <div class="form-group">
-                <input type="text" id="cartPhone" class="form-control" placeholder="Téléphone (facultatif)" style="font-size:12.5px; padding:6px 10px;">
+                <input type="text" id="cartPhone" class="form-control" placeholder="Téléphone (facultatif)"
+                  style="font-size:12.5px; padding:6px 10px;">
               </div>
             </div>
 
@@ -1282,7 +1615,8 @@
               <div class="total-row" style="align-items:center;">
                 <span>Remise commerciale</span>
                 <div style="display:flex; align-items:center; gap:4px; max-width:130px;">
-                  <input type="number" id="cartDiscount" class="form-control" placeholder="0" min="0" oninput="renderCart()" style="font-size:12px; padding:3px 6px; text-align:right;">
+                  <input type="number" id="cartDiscount" class="form-control" placeholder="0" min="0"
+                    oninput="renderCart()" style="font-size:12px; padding:3px 6px; text-align:right;">
                   <span style="font-size:12px; color:var(--text-muted);">F</span>
                 </div>
               </div>
@@ -1327,7 +1661,8 @@
               </div>
               <div class="form-group col-full">
                 <label class="form-label">Bénéficiaire / Motif / Fournisseur</label>
-                <input type="text" id="expNote" class="form-control" placeholder="Ex: Achat de 20kg de sucre et lait au marché Ndokoti">
+                <input type="text" id="expNote" class="form-control"
+                  placeholder="Ex: Achat de 20kg de sucre et lait au marché Ndokoti">
               </div>
             </div>
             <div style="margin-top:20px; display:flex; gap:10px;">
@@ -1361,17 +1696,22 @@
         <!-- Accounts Overview -->
         <div class="grid-3" style="margin-bottom:24px;">
           <div class="card">
-            <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">💵 Caisse Espèces (Tiroir)</span>
+            <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">💵 Caisse
+              Espèces (Tiroir)</span>
             <h2 id="cashDrawerBalance" style="color:var(--primary); font-size:24px; margin:8px 0;">0 F CFA</h2>
-            <div style="font-size:12px; color:var(--text-muted);" id="cashDrawerDetail">Initial: 0 F | Entrées: 0 F | Sorties: 0 F</div>
+            <div style="font-size:12px; color:var(--text-muted);" id="cashDrawerDetail">Initial: 0 F | Entrées: 0 F |
+              Sorties: 0 F</div>
           </div>
           <div class="card">
-            <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">📱 Mobile Money (OM & MoMo)</span>
+            <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">📱 Mobile
+              Money (OM & MoMo)</span>
             <h2 id="cashMomoBalance" style="color:var(--gold); font-size:24px; margin:8px 0;">0 F CFA</h2>
-            <div style="font-size:12px; color:var(--text-muted);" id="cashMomoDetail">Initial: 0 F | Entrées: 0 F | Sorties: 0 F</div>
+            <div style="font-size:12px; color:var(--text-muted);" id="cashMomoDetail">Initial: 0 F | Entrées: 0 F |
+              Sorties: 0 F</div>
           </div>
           <div class="card">
-            <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">🏦 Virement & Banque</span>
+            <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">🏦
+              Virement & Banque</span>
             <h2 id="cashBankBalance" style="color:var(--blue); font-size:24px; margin:8px 0;">0 F CFA</h2>
             <div style="font-size:12px; color:var(--text-muted);" id="cashBankDetail">Total disponible</div>
           </div>
@@ -1392,20 +1732,24 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Solde Théorique Espèces Attendu</label>
-                <input type="text" id="closingExpected" class="form-control" readonly style="font-weight:700; background:#faf2ec;">
+                <input type="text" id="closingExpected" class="form-control" readonly
+                  style="font-weight:700; background:#faf2ec;">
               </div>
               <div class="form-group col-full">
                 <label class="form-label">Montant Physique Compté en Caisse (F CFA)</label>
-                <input type="number" id="closingCounted" class="form-control" placeholder="Saisir la somme totale comptée..." oninput="calculateClosingPreview()">
+                <input type="number" id="closingCounted" class="form-control"
+                  placeholder="Saisir la somme totale comptée..." oninput="calculateClosingPreview()">
               </div>
             </div>
 
             <!-- Ecart calculation box -->
-            <div id="closingDiffBox" style="margin:16px 0; padding:12px 16px; border-radius:var(--radius-sm); display:none;"></div>
+            <div id="closingDiffBox"
+              style="margin:16px 0; padding:12px 16px; border-radius:var(--radius-sm); display:none;"></div>
 
             <div class="form-group" style="margin-bottom:16px;">
               <label class="form-label">Observations / Notes de clôture</label>
-              <input type="text" id="closingNotes" class="form-control" placeholder="Remarques éventuelles sur la journée...">
+              <input type="text" id="closingNotes" class="form-control"
+                placeholder="Remarques éventuelles sur la journée...">
             </div>
 
             <button class="btn btn-primary" style="width:100%;" onclick="submitCashClosing()">
@@ -1437,7 +1781,8 @@
 
             <hr style="border:0; border-top:1px solid var(--border); margin:20px 0;">
 
-            <h4 style="font-size:14px; font-weight:700; margin-bottom:10px; color:var(--primary);">Dernières Clôtures Validées</h4>
+            <h4 style="font-size:14px; font-weight:700; margin-bottom:10px; color:var(--primary);">Dernières Clôtures
+              Validées</h4>
             <div class="table-responsive">
               <table>
                 <thead>
@@ -1498,7 +1843,8 @@
           <div class="form-grid cols-3" style="margin-bottom:16px;">
             <div class="form-group">
               <label class="form-label">Rechercher</label>
-              <input type="text" id="histSearch" class="form-control" placeholder="Client, produit, motif, montant..." oninput="renderHistory()">
+              <input type="text" id="histSearch" class="form-control" placeholder="Client, produit, motif, montant..."
+                oninput="renderHistory()">
             </div>
             <div class="form-group">
               <label class="form-label">Type d'opération</label>
@@ -1573,7 +1919,8 @@
           <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
             <button class="btn btn-primary btn-sm" onclick="renderReport()">🔄 Actualiser le rapport</button>
             <button class="btn btn-secondary btn-sm" onclick="exportExcelCSV()">📊 Exporter Excel (CSV)</button>
-            <button class="btn btn-secondary btn-sm" onclick="printFullReport()">🖨️ Imprimer / Sauvegarder en PDF</button>
+            <button class="btn btn-secondary btn-sm" onclick="printFullReport()">🖨️ Imprimer / Sauvegarder en
+              PDF</button>
           </div>
 
           <!-- Report Results Content -->
@@ -1668,7 +2015,8 @@
           <div class="card-header">
             <div>
               <h3 class="card-title">🔒 Sécurité & Code PIN Administrateur</h3>
-              <p style="color:var(--text-muted); font-size:13px;">Protège les clôtures de caisse, modifications d'historique et réinitialisations</p>
+              <p style="color:var(--text-muted); font-size:13px;">Protège les clôtures de caisse, modifications
+                d'historique et réinitialisations</p>
             </div>
             <button class="btn btn-secondary btn-sm" onclick="openChangePinModal()">🔑 Modifier le Code PIN</button>
           </div>
@@ -1683,9 +2031,11 @@
           <div class="card-header">
             <div>
               <h3 class="card-title">🕒 Sauvegardes Automatiques Locales (Points de Restauration)</h3>
-              <p style="color:var(--text-muted); font-size:13px;">Historique des sauvegardes de secours enregistrées dans votre navigateur</p>
+              <p style="color:var(--text-muted); font-size:13px;">Historique des sauvegardes de secours enregistrées
+                dans votre navigateur</p>
             </div>
-            <button class="btn btn-secondary btn-sm" onclick="createManualSnapshot()">＋ Créer un point maintenant</button>
+            <button class="btn btn-secondary btn-sm" onclick="createManualSnapshot()">＋ Créer un point
+              maintenant</button>
           </div>
           <div class="table-responsive" style="margin-top:10px;">
             <table>
@@ -1718,7 +2068,8 @@
             <label class="btn btn-secondary" for="importJsonFile" style="cursor:pointer;">
               📂 Restaurer une Sauvegarde
             </label>
-            <input type="file" id="importJsonFile" accept=".json" style="display:none;" onchange="importBackupJSON(event)">
+            <input type="file" id="importJsonFile" accept=".json" style="display:none;"
+              onchange="importBackupJSON(event)">
 
             <button class="btn btn-secondary" onclick="loadSampleDemoData()">
               ✨ Charger Données de Démonstration (Essai)
@@ -1747,7 +2098,8 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal('modalReceipt')">Fermer</button>
-        <button class="btn btn-success" id="btnShareWhatsApp" onclick="shareTicketWhatsApp()">📲 Envoyer par WhatsApp</button>
+        <button class="btn btn-success" id="btnShareWhatsApp" onclick="shareTicketWhatsApp()">📲 Envoyer par
+          WhatsApp</button>
         <button class="btn btn-accent" onclick="printReceiptDirect()">🖨️ Imprimer Ticket</button>
       </div>
     </div>
@@ -1764,7 +2116,8 @@
         <div class="form-grid">
           <div class="form-group col-full">
             <label class="form-label">Désignation du produit ou service</label>
-            <input type="text" id="customItemName" class="form-control" placeholder="Ex: Pièce montée personnalisée 3 étages">
+            <input type="text" id="customItemName" class="form-control"
+              placeholder="Ex: Pièce montée personnalisée 3 étages">
           </div>
           <div class="form-group">
             <label class="form-label">Catégorie</label>
@@ -1815,7 +2168,8 @@
           </div>
           <div class="form-group col-full" style="display:flex; align-items:center; gap:8px; margin-top:4px;">
             <input type="checkbox" id="prodTrackStock" checked style="width:18px; height:18px; cursor:pointer;">
-            <label for="prodTrackStock" style="font-size:13.5px; cursor:pointer;">Activer le suivi et l'alerte de stock pour ce produit</label>
+            <label for="prodTrackStock" style="font-size:13.5px; cursor:pointer;">Activer le suivi et l'alerte de stock
+              pour ce produit</label>
           </div>
         </div>
       </div>
@@ -1910,8 +2264,10 @@
         <button class="modal-close" onclick="closeModal('modalPinCheck')">✕</button>
       </div>
       <div class="modal-body" style="text-align:center;">
-        <p style="color:var(--text-muted); font-size:13px; margin-bottom:12px;">Saisissez le code PIN Administrateur pour valider :</p>
-        <input type="password" id="pinInput" class="pin-display-input" maxlength="8" placeholder="••••" autofocus onkeydown="if(event.key==='Enter') verifyPinInput()">
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:12px;">Saisissez le code PIN Administrateur
+          pour valider :</p>
+        <input type="password" id="pinInput" class="pin-display-input" maxlength="8" placeholder="••••" autofocus
+          onkeydown="if(event.key==='Enter') verifyPinInput()">
         <div class="pin-keypad">
           <button type="button" class="pin-key" onclick="appendPinDigit('1')">1</button>
           <button type="button" class="pin-key" onclick="appendPinDigit('2')">2</button>
@@ -1922,7 +2278,8 @@
           <button type="button" class="pin-key" onclick="appendPinDigit('7')">7</button>
           <button type="button" class="pin-key" onclick="appendPinDigit('8')">8</button>
           <button type="button" class="pin-key" onclick="appendPinDigit('9')">9</button>
-          <button type="button" class="pin-key" onclick="clearPinInput()" style="font-size:14px; color:var(--danger);">C</button>
+          <button type="button" class="pin-key" onclick="clearPinInput()"
+            style="font-size:14px; color:var(--danger);">C</button>
           <button type="button" class="pin-key" onclick="appendPinDigit('0')">0</button>
           <button type="button" class="pin-key" onclick="backspacePinDigit()" style="font-size:14px;">⌫</button>
         </div>
@@ -1987,24 +2344,80 @@
         openingMomo: 0,
         ops: [],
         products: [
-          { id: 'p1', name: 'Magnum Chocolat Croustillant', category: 'Magnums', price: 1200, stock: 35, trackStock: true, active: true },
-          { id: 'p2', name: 'Magnum Caramel Beurre Salé', category: 'Magnums', price: 1000, stock: 30, trackStock: true, active: true },
-          { id: 'p3', name: 'Magnum Fraise & Amandes', category: 'Magnums', price: 1200, stock: 25, trackStock: true, active: true },
-          { id: 'p4', name: 'Glace Panée Vanille Sauvage', category: 'Glaces panées', price: 1500, stock: 20, trackStock: true, active: true },
-          { id: 'p5', name: 'Glace Panée Chocolat Fondant', category: 'Glaces panées', price: 1500, stock: 20, trackStock: true, active: true },
-          { id: 'p6', name: 'Pot Glace 1 Boule', category: 'Crèmes glacées', price: 500, stock: 50, trackStock: true, active: true },
-          { id: 'p7', name: 'Pot Glace 2 Boules', category: 'Crèmes glacées', price: 900, stock: 40, trackStock: true, active: true },
-          { id: 'p8', name: 'Bac 500ml Artisanal', category: 'Crèmes glacées', price: 2500, stock: 15, trackStock: true, active: true },
-          { id: 'p9', name: 'Bac 1L Familial', category: 'Crèmes glacées', price: 4500, stock: 12, trackStock: true, active: true },
-          { id: 'p10', name: 'Gâteau Glacé Personnalisé', category: 'Commandes spéciales', price: 12000, stock: 10, trackStock: false, active: true },
-          { id: 'p11', name: 'Boîte 6 Cupcakes', category: 'Commandes spéciales', price: 5000, stock: 15, trackStock: true, active: true },
-          { id: 'p12', name: 'Smoothie / Jus Naturel', category: 'Boissons & Extras', price: 1000, stock: 30, trackStock: true, active: true },
-          { id: 'p13', name: 'Frais de Livraison Douala', category: 'Livraisons', price: 1000, stock: 99, trackStock: false, active: true }
+          // ═══ MAGNUMS (1 à 800F · 2 à 1500F · 3 à 1000F) ═══
+          { id: 'mag1', name: 'Magnum Vanille', category: 'Magnums', price: 800, stock: 30, trackStock: true, active: true },
+          { id: 'mag2', name: 'Magnum Fraise', category: 'Magnums', price: 800, stock: 30, trackStock: true, active: true },
+          { id: 'mag3', name: 'Magnum Menthe', category: 'Magnums', price: 800, stock: 30, trackStock: true, active: true },
+          { id: 'mag4', name: 'Magnum Baillys', category: 'Magnums', price: 800, stock: 30, trackStock: true, active: true },
+          { id: 'mag5', name: 'Magnum Ananas', category: 'Magnums', price: 800, stock: 30, trackStock: true, active: true },
+          { id: 'mag6', name: 'Magnum Cocktail', category: 'Magnums', price: 800, stock: 30, trackStock: true, active: true },
+          { id: 'mag7', name: 'Magnum Passion', category: 'Magnums', price: 800, stock: 30, trackStock: true, active: true },
+
+          // ═══ GLACES PANÉES (1 à 1000F · 3 à 2500F · 7 à 5000F) ═══
+          { id: 'gp1', name: 'Glace Panée Vanille', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+          { id: 'gp2', name: 'Glace Panée Fraise', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+          { id: 'gp3', name: 'Glace Panée Menthe', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+          { id: 'gp4', name: 'Glace Panée Spéculos', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+          { id: 'gp5', name: 'Glace Panée Baillys', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+          { id: 'gp6', name: 'Glace Panée Café', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+          { id: 'gp7', name: 'Glace Panée Nutella', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+          { id: 'gp8', name: 'Glace Panée Oreo', category: 'Glaces panées', price: 1000, stock: 30, trackStock: true, active: true },
+
+          // ═══ CRÈMES GLACÉES (90ml 750F · 250ml 1500F · 1L 3500F) ═══
+          { id: 'cg1', name: 'Double-Chocolat 90ml', category: 'Crèmes glacées', price: 750, stock: 20, trackStock: true, active: true },
+          { id: 'cg2', name: 'Double-Chocolat 250ml', category: 'Crèmes glacées', price: 1500, stock: 15, trackStock: true, active: true },
+          { id: 'cg3', name: 'Double-Chocolat 1L', category: 'Crèmes glacées', price: 3500, stock: 10, trackStock: true, active: true },
+          { id: 'cg4', name: 'Vanille-Chocolat 90ml', category: 'Crèmes glacées', price: 750, stock: 20, trackStock: true, active: true },
+          { id: 'cg5', name: 'Vanille-Chocolat 250ml', category: 'Crèmes glacées', price: 1500, stock: 15, trackStock: true, active: true },
+          { id: 'cg6', name: 'Vanille-Chocolat 1L', category: 'Crèmes glacées', price: 3500, stock: 10, trackStock: true, active: true },
+          { id: 'cg7', name: 'Glace au Café 90ml', category: 'Crèmes glacées', price: 750, stock: 20, trackStock: true, active: true },
+          { id: 'cg8', name: 'Glace au Café 250ml', category: 'Crèmes glacées', price: 1500, stock: 15, trackStock: true, active: true },
+          { id: 'cg9', name: 'Glace au Café 1L', category: 'Crèmes glacées', price: 3500, stock: 10, trackStock: true, active: true },
+
+          // ═══ GLACE ANGE CRUSH (90ml 850F · 250ml 2000F · 1L 4500F) ═══
+          { id: 'ac1', name: 'Caramel Beurre Salé 90ml', category: 'Glace Ange Crush', price: 850, stock: 15, trackStock: true, active: true },
+          { id: 'ac2', name: 'Caramel Beurre Salé 250ml', category: 'Glace Ange Crush', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ac3', name: 'Caramel Beurre Salé 1L', category: 'Glace Ange Crush', price: 4500, stock: 8, trackStock: true, active: true },
+          { id: 'ac4', name: 'Glace au Nutella 90ml', category: 'Glace Ange Crush', price: 850, stock: 15, trackStock: true, active: true },
+          { id: 'ac5', name: 'Glace au Nutella 250ml', category: 'Glace Ange Crush', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ac6', name: 'Glace au Nutella 1L', category: 'Glace Ange Crush', price: 4500, stock: 8, trackStock: true, active: true },
+          { id: 'ac7', name: 'Glace au Spéculos 90ml', category: 'Glace Ange Crush', price: 850, stock: 15, trackStock: true, active: true },
+          { id: 'ac8', name: 'Glace au Spéculos 250ml', category: 'Glace Ange Crush', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ac9', name: 'Glace au Spéculos 1L', category: 'Glace Ange Crush', price: 4500, stock: 8, trackStock: true, active: true },
+          { id: 'ac10', name: 'Glace Oreo + Nutella 90ml', category: 'Glace Ange Crush', price: 850, stock: 15, trackStock: true, active: true },
+          { id: 'ac11', name: 'Glace Oreo + Nutella 250ml', category: 'Glace Ange Crush', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ac12', name: 'Glace Oreo + Nutella 1L', category: 'Glace Ange Crush', price: 4500, stock: 8, trackStock: true, active: true },
+          { id: 'ac13', name: 'Vanille-Kinder 90ml', category: 'Glace Ange Crush', price: 850, stock: 15, trackStock: true, active: true },
+          { id: 'ac14', name: 'Vanille-Kinder 250ml', category: 'Glace Ange Crush', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ac15', name: 'Vanille-Kinder 1L', category: 'Glace Ange Crush', price: 4500, stock: 8, trackStock: true, active: true },
+          { id: 'ac16', name: 'Noix de Coco Râpée 90ml', category: 'Glace Ange Crush', price: 850, stock: 15, trackStock: true, active: true },
+          { id: 'ac17', name: 'Noix de Coco Râpée 250ml', category: 'Glace Ange Crush', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ac18', name: 'Noix de Coco Râpée 1L', category: 'Glace Ange Crush', price: 4500, stock: 8, trackStock: true, active: true },
+          { id: 'ac19', name: 'Glace à la Pistache 90ml', category: 'Glace Ange Crush', price: 850, stock: 15, trackStock: true, active: true },
+          { id: 'ac20', name: 'Glace à la Pistache 250ml', category: 'Glace Ange Crush', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ac21', name: 'Glace à la Pistache 1L', category: 'Glace Ange Crush', price: 4500, stock: 8, trackStock: true, active: true },
+
+          // ═══ GLACE ALCOOLISÉE (90ml 800F · 250ml 2000F · 1L 4500F) ═══
+          { id: 'ga1', name: 'Glace au Baillys 90ml', category: 'Glace Alcoolisée', price: 800, stock: 15, trackStock: true, active: true },
+          { id: 'ga2', name: 'Glace au Baillys 250ml', category: 'Glace Alcoolisée', price: 2000, stock: 10, trackStock: true, active: true },
+          { id: 'ga3', name: 'Glace au Baillys 1L', category: 'Glace Alcoolisée', price: 4500, stock: 8, trackStock: true, active: true },
+
+          // ═══ COMMANDES SPÉCIALES ═══
+          { id: 'cs1', name: 'Gâteau Glacé Personnalisé', category: 'Commandes spéciales', price: 12000, stock: 10, trackStock: false, active: true },
+          { id: 'cs2', name: 'Boîte 6 Cupcakes', category: 'Commandes spéciales', price: 5000, stock: 15, trackStock: true, active: true },
+
+          // ═══ BOISSONS & EXTRAS ═══
+          { id: 'bx1', name: 'Smoothie / Jus Naturel', category: 'Boissons & Extras', price: 1000, stock: 30, trackStock: true, active: true },
+
+          // ═══ LIVRAISONS ═══
+          { id: 'lv1', name: 'Frais de Livraison Douala', category: 'Livraisons', price: 1000, stock: 99, trackStock: false, active: true }
         ],
         revenueCats: [
           'Magnums',
           'Glaces panées',
           'Crèmes glacées',
+          'Glace Ange Crush',
+          'Glace Alcoolisée',
           'Commandes spéciales',
           'Livraisons',
           'Boissons & Extras',
@@ -2175,7 +2588,7 @@
         if (now - lastTime < 4 * 3600 * 1000) return;
         createSnapshot(desc);
         localStorage.setItem('angeNoel_last_auto_snapshot_time', String(now));
-      } catch (e) {}
+      } catch (e) { }
     }
 
     function createSnapshot(desc = 'Point de sauvegarde') {
@@ -2275,8 +2688,8 @@
       const itemsLines = items.map(it => `• ${it.qty}x ${it.name} = ${money(it.price * it.qty)}`).join('\n');
       const discountText = op.discount ? `\n🏷️ Remise : -${money(op.discount)}` : '';
 
-      const msg = 
-`🍨 *${(data.shop.name || 'Les Gourmandises de Ange Noël').toUpperCase()}* 🍨
+      const msg =
+        `🍨 *${(data.shop.name || 'Les Gourmandises de Ange Noël').toUpperCase()}* 🍨
 📍 ${data.shop.address || 'Nyalla Rail – Douala'}
 📞 Tel: ${data.shop.phone || '657 268 246'}
 ----------------------------------------
@@ -3322,7 +3735,7 @@ ${itemsLines}${discountText}
             <table>
               <thead><tr><th>Catégorie</th><th style="text-align:right;">Montant</th><th style="text-align:right;">Part</th></tr></thead>
               <tbody>
-                ${Object.entries(catStats).sort((a,b)=>b[1]-a[1]).map(([cat, amt]) => `
+                ${Object.entries(catStats).sort((a, b) => b[1] - a[1]).map(([cat, amt]) => `
                   <tr>
                     <td><b>${escapeHtml(cat)}</b></td>
                     <td style="text-align:right;">${money(amt)}</td>
@@ -3338,7 +3751,7 @@ ${itemsLines}${discountText}
             <table>
               <thead><tr><th>Mode de Paiement</th><th style="text-align:right;">Montant</th><th style="text-align:right;">Part</th></tr></thead>
               <tbody>
-                ${Object.entries(payStats).sort((a,b)=>b[1]-a[1]).map(([p, amt]) => `
+                ${Object.entries(payStats).sort((a, b) => b[1] - a[1]).map(([p, amt]) => `
                   <tr>
                     <td><b>${escapeHtml(p)}</b></td>
                     <td style="text-align:right;">${money(amt)}</td>
@@ -4112,4 +4525,5 @@ ${itemsLines}${discountText}
     refreshUI();
   </script>
 </body>
+
 </html>
